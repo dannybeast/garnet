@@ -1,0 +1,48 @@
+// Font
+$mainFont: "Segoe UI";
+
+// Size
+$mainFontColor: #000;
+$mainFontSize: 16px;
+$mainFontWeight: 400;
+$mainLineHeight: 1.3;
+
+// Main color
+$gray-light: #f0f0f0;
+$default-color: #ffffff;
+$success-color: #1ec16f;
+$danger-color: #eb001b;
+$primary-color-dark: #172449;
+$purple-color: #0098ac;
+
+$warning-color: #ff5100;
+$gray: #c1c1c1;
+$light: #f6f6f6;
+$primary-color: #000;
+$border-base: #dbdddc;
+
+// Neutral Color
+$neutral-primary: #d91512;
+$neutral-regular: #dcecf3;
+$neutral-secondary: #98b0b7;
+$neutral-placeholder: #c0c4cc;
+
+// Border Color
+$border-light: #d9e2f2;
+$border-lighter: #ebeef5;
+$border-lightex: #e7ecf6;
+
+// Animations
+$anim: cubic-bezier(0.58, 0.3, 0.005, 1);
+$animSpeed: 0.4s;
+
+$block-radius: 8px;
+
+// fields
+$field-margin: 25px;
+$field-border-width: 1px;
+$field-border-color: #cdcdcd;
+$field-color-danger: $danger-color;
+$field-radius: 26px;
+$field-height: 50px;
+$field-bg: transparent;

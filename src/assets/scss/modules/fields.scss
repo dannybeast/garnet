@@ -1,0 +1,380 @@
+.form-fields {
+  &__row {
+    @include row-flex();
+    margin-left: -$offset_one_side * 2;
+    margin-right: -$offset_one_side * 2;
+
+    @include lg-block() {
+      margin-left: -$offset_one_side;
+      margin-right: -$offset_one_side;
+    }
+
+    &:last-child {
+      margin-bottom: -20px;
+    }
+
+    &:last-child {
+      margin-top: 30px;
+      align-items: center;
+
+      @include sm-block() {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__col {
+    margin-left: $offset_one_side * 2;
+    margin-right: $offset_one_side * 2;
+    flex: 1;
+    margin-bottom: 20px;
+
+    @include lg-block() {
+      margin-left: $offset_one_side;
+      margin-right: $offset_one_side;
+    }
+
+    @include sm-block() {
+      flex: auto;
+    }
+  }
+
+  &__captcha {
+    text-align: center;
+  }
+}
+
+// FORM STYLES
+
+// buttons, submit
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+input[disabled] {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+//
+
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+label {
+  display: block;
+  line-height: 1.1;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(#000, 0.7);
+  font-family: $mainFont;
+
+  sup {
+    color: $danger-color;
+  }
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  margin: 0;
+  font-weight: 400;
+}
+
+input {
+  line-height: normal;
+}
+
+textarea {
+  line-height: 1.25em;
+}
+
+select {
+  border: $field-border-width solid $field-border-color;
+  background-color: $field-bg;
+  appearance: none;
+  padding-right: 30px;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+select[size],
+select[multiple] {
+  height: auto;
+}
+
+.select {
+  position: relative;
+
+  select {
+    margin: 0;
+    cursor: pointer;
+  }
+  &--after-none {
+    &:after {
+      display: none !important;
+    }
+  }
+  &:after {
+    content: "";
+    width: 9px;
+    height: 15px;
+    background: svg-load("../icons/play.svg", fill=#ccc);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    right: 15px;
+    pointer-events: none;
+  }
+
+  &--radius {
+    select {
+      border-radius: 25px;
+    }
+  }
+
+  &--line-gray {
+    select {
+      background: transparent;
+      border: solid 1px #bababa;
+    }
+  }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  display: block;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+input:not([type="checkbox"]),
+input:not([type="radio"]),
+select,
+textarea {
+  border: $field-border-width solid $field-border-color;
+  border-radius: $field-radius;
+  background: #fff;
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 15px;
+  height: $field-height;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &::placeholder {
+    color: rgba($primary-color, 0.3);
+  }
+
+  &:hover {
+    border-color: rgba($primary-color, 0.3);
+  }
+
+  &:focus {
+    border-color: rgba($primary-color, 0.3);
+  }
+
+  &.field-stroke {
+    border: none;
+    background: transparent;
+    padding-left: 0;
+    font-size: 18px;
+    height: 35px;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(#000, 0.2);
+    &:hover {
+      border-bottom: 2px solid rgba(#000, 0.35);
+    }
+  }
+  &.field-border {
+    background: #fff;
+    color: rgba(#000, 0.6);
+    border-color: rgba(#000, 0.2) !important;
+  }
+}
+
+textarea {
+  height: 120px;
+  padding-top: 10px;
+}
+
+input[type="color"] {
+  padding: 0;
+}
+
+input[type="color"] {
+  width: $field-height;
+  height: $field-height;
+}
+
+.field {
+  position: relative;
+  .messages {
+    margin: 5px 0 0 0;
+    font-size: 12px;
+  }
+  label:not(.select) {
+    margin-bottom: 8px;
+    font-family: $mainFont;
+
+    br {
+      @include sm-block() {
+        display: none;
+      }
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    .select {
+      flex-shrink: 0;
+      select {
+        border-color: transparent !important;
+      }
+    }
+    & > * {
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:last-child {
+        border-top-right-radius: $field-radius;
+        border-bottom-right-radius: $field-radius;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  &--error {
+    color: $field-color-danger;
+
+    * {
+      border-color: $field-color-danger !important;
+    }
+
+    // checkbox & radio error styles
+    .checkbox,
+    .radio {
+      span {
+        &:before {
+          border-color: $field-color-danger;
+        }
+      }
+    }
+  }
+
+  &--row {
+    display: flex;
+    margin-bottom: 15px;
+
+    @include sm-block() {
+      flex-wrap: wrap;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    input {
+      margin: 0;
+    }
+
+    select,
+    .select {
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    label:not(.select) {
+      margin-right: 15px !important;
+      margin-bottom: 0;
+      margin-top: 0 !important;
+      width: 160px;
+      flex-shrink: 0;
+      font-size: 18px;
+      font-weight: 500;
+      padding-top: 12px;
+
+      @include sm-block() {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding-top: 0;
+      }
+    }
+  }
+
+  &--row-space {
+    padding-left: 160px+15px;
+    margin: 15px 0;
+
+    @include sm-block() {
+      padding-left: 0;
+    }
+  }
+}
+
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  background-color: $border-light;
+  color: $neutral-primary;
+  border-color: $field-border-color;
+}
+
+// input:invalid,
+// textarea:invalid,
+// select:invalid {
+//     color: $field-color-danger !important;
+//     border-color: $field-color-danger !important;
+// }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

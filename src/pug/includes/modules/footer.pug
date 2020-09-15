@@ -1,0 +1,37 @@
++b.FOOTER.footer
+  .container
+    +e.top
+      +b.H3.title Наши контакты
+      .typography
+        p Контакты компании "Гранат”
+      +b.follow
+        +e.UL
+          +e.LI
+            +e.A(href="#" target="_blank")
+              img(src="assets/images/social/instagram.png", alt="")
+          +e.LI
+            +e.A(href="#" target="_blank")
+              img(src="assets/images/social/vk.png", alt="")
+    +e.row
+      +e.col
+        +b.UL.contacts
+          +e.LI
+            +e.icon
+              +icon('phone')
+            a(href="tel:+79181701095" class="not-decoration-link") +7 (918) 170-10-95
+          +e.LI
+            +e.icon
+              +icon('mail')
+            a(href="mailto:miсhurincompany@gmail.com") miсhurincompany@gmail.com
+      +e.col 
+        +e.address
+          p 352154, Краснодарский край, Кавказский район, х. Привольный, ул. Мира, д. 78
+          +b.A(href="#").address-link
+            span Показать на карте
+            +icon('place')
+    +e.bottom
+      +e.A(href="index.html" class="logo")
+        img(src="assets/images/logo/logo.png", alt="")
+      p © 2020, Все права защищены, Компания «Гранат».
+      
+          

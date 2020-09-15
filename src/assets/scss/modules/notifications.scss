@@ -1,0 +1,141 @@
+$notice-danger: $danger-color;
+$notice-success: #15a23d;
+
+.notice {
+  position: fixed;
+  right: 30px;
+  width: 260px;
+  border-radius: 5px;
+  bottom: 30px;
+  transform: translateY(150px);
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  padding: rem(15px);
+  z-index: 999999;
+  transition: all 0.3s linear;
+  opacity: 0;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  @include sm-block() {
+    left: 30px;
+    width: auto;
+  }
+  &--open {
+    transform: none;
+    opacity: 1;
+  }
+
+  &--green {
+    background: $notice-success;
+    box-shadow: 0 5px 10px rgba($notice-success, 0.2);
+  }
+
+  &--red {
+    background: $notice-danger;
+    box-shadow: 0 5px 10px rgba($notice-danger, 0.2);
+  }
+}
+
+.notification-item {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.55;
+  border-radius: 5px;
+  color: #000;
+  $parent: &;
+  user-select: none;
+  background: #fff;
+  border: solid 4px #e1e1e1;
+
+  &__date {
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  &--neutral {
+    border-color: #cceef3;
+    background: #cceef3;
+    #{$parent}__close {
+      svg {
+        fill: #3f3d56;
+      }
+    }
+  }
+  &--white {
+    background: #fff;
+    border: solid 4px #e1e1e1;
+    #{$parent}__close {
+      svg {
+        fill: rgba(#9cb0bb, 0.5);
+      }
+    }
+  }
+  &--warning {
+    background: #e1e1e1;
+    border-color: #e1e1e1;
+    #{$parent}__close {
+      svg {
+        fill: #919191;
+      }
+    }
+  }
+}
+
+.notifications {
+  position: fixed;
+  top: 170px;
+  right: 15px;
+  width: 190px;
+  z-index: 990;
+  transition: all 0.4s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50px);
+  overflow-y: auto;
+  @include xxl-block() {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid rgba(161, 185, 203, 0.31);
+    border-radius: 6px;
+    top: 120px;
+    max-height: 100%;
+  }
+  @include sm-block() {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 0;
+  }
+  &.is-open {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+  .notification-item {
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

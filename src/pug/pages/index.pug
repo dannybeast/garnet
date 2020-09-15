@@ -1,0 +1,215 @@
+extends ../layout/main
+
+block variables
+    - var title = 'Гранат - Кубанское яблоко – вкус, знакомый с детства';
+    - var description = '';
+    - var pageName = 'index';
+
+
+block content
+    // WEBSITE
+    +b.content
+
+        +b.page-index
+            include ../includes/modules/header
+            +b.SECTION.intro
+                .container
+                    +e.H1.title Кубанское яблоко – вкус, знакомый с детства
+                    +e.buttons
+                        +b.A(href="#").intro-button
+                            +e.icon
+                                img(src="assets/images/icons/apple-details.png", alt="")
+                            span Подробнее о нас
+                        +b.A(href="#").intro-button
+                            +e.icon
+                                img(src="assets/images/icons/apple-price.png", alt="")
+                            span Получить прайс-лист
+                        +b.A(href="#").intro-button
+                            +e.icon
+                                img(src="assets/images/icons/apple-buy.png", alt="")
+                            span Оптовая продажа яблок
+                +e.IMG(src="assets/images/intro.jpg" class="img")
+            +b.ARTICLE.gray
+                +b.SECTION.advantages
+                    .container
+                        +e.row
+                            +e.col
+                                +b.advantage-item
+                                    +e.content
+                                        +e.icon
+                                            +icon('apple')
+                                        +e.P.title Современный интенсивный сад
+                                        +e.desc
+                                            p В нашем саду растут яблони следующих сортов: «Пирос», «Женева», «Гала», Делишес», «Голден делишес», Ренет симиренко
+                            +e.col
+                                +b.advantage-item
+                                    +e.content
+                                        +e.icon
+                                            +icon('agriculture')
+                                        +e.P.title Передовые технологии
+                                        +e.desc
+                                            p В нашем саду растут яблони следующих сортов: «Пирос», «Женева», «Гала», Делишес», «Голден делишес», Ренет симиренко
+                            +e.col
+                                +b.advantage-item
+                                    +e.content
+                                        +e.icon
+                                            +icon('love')
+                                        +e.P.title Бережный<br> сбор
+                                        +e.desc
+                                            p В нашем саду растут яблони следующих сортов: «Пирос», «Женева», «Гала», Делишес», «Голден делишес», Ренет симиренко
+                            +e.col
+                                +b.advantage-item
+                                    +e.content
+                                        +e.icon
+                                            +icon('calendar')
+                                        +e.P.title Длительное хранение
+                                        +e.desc
+                                            p В нашем саду растут яблони следующих сортов: «Пирос», «Женева», «Гала», Делишес», «Голден делишес», Ренет симиренко
+
+            +b.SECTION.about
+                //+e.image
+                    img(src="assets/images/about.jpg", alt="")
+                .container
+                    
+                    +e.row
+                        +e.col
+                            +b.P.subtitle.color-primary Узнайте
+                            +b.H3.title О компании «Гранат»
+                            .typography
+                                p 
+                                    strong Гранат – это интенсивные сады, расположенные в предгорной зоне Краснодарского края. 
+                                p В своей работе мы обобщаем опыт иностранных производителей и адаптируем их под условия нашего региона. Благодаря этому мы предлагаем своим покупателям высококачественные яблоки.
+                            +e.buttons
+                                +b.A(href="#" class="btn --line-primary") Подробнее
+            +b.SECTION.apple-slider
+                .container.swiper-container
+                    .swiper-wrapper
+                        .swiper-slider
+                            img(src="assets/images/apple-slider/1.png", alt="")
+
+            +b.SECTION.products
+                .container
+                    +e.row
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/1.png", alt="")
+                                    +e.P.title Айдаред
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/2.png", alt="")
+                                    +e.P.title Гала
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/3.png", alt="")
+                                    +e.P.title Ред делишес
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/4.png", alt="")
+                                    +e.P.title Ред джонаприн
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/5.png", alt="")
+                                    +e.P.title Голден делишес
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/6.png", alt="")
+                                    +e.P.title Гренни смит
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+                        +e.col
+                            +b.product-item
+                                +e.content
+                                    +e.image
+                                        img(src="assets/images/products/7.png", alt="")
+                                    +e.P.title Фуджи
+                                    +e.desc
+                                        p Гре́нни Смит — сорт яблони, созданный в 1868 году в Австралии. Название сорта переводится как «бабуля Смит»; было дано в честь Анны Марии Смит. Данный сорт имеет три русскоязычных синонима: «Грани Смит», «Гренни Смит» и «Гранни Смит».
+
+            +b.SECTION.cooperation
+                .container
+                    +e.row
+                        +e.col
+                            +b.P.subtitle.color-primary Выгодно!
+                            +b.H3.title Сотрудничество с нами
+                            .typography
+                                p В своей работе мы обобщаем опыт иностранных производителей и адаптируем их под условия нашего региона. Благодаря этому мы предлагаем своим покупателям высококачественные яблоки.
+                    +b.steps
+                        +e.col
+                            +b.A(href="#" class="btn --primary") Отправить заявку
+                        +e.col
+                            +b.step-item
+                                +e.icon
+                                    +icon('mail')
+                                +e.P.title
+                                    span Шаг
+                                    b 1    
+                                +e.desc
+                                    p Вы оставляете заявку <a href="#">на сайте</a> или по телефону    
+                        +e.col
+                            +b.step-item
+                                +e.icon
+                                    +icon('doc')
+                                +e.P.title
+                                    span Шаг
+                                    b 2   
+                                +e.desc
+                                    p Формируем все необходимые документы  
+                        +e.col
+                            +b.step-item
+                                +e.icon
+                                    +icon('apples')
+                                +e.P.title
+                                    span Шаг
+                                    b 3    
+                                +e.desc
+                                    p Готовим продукцию к отгрузке в удобное для Вас время.
+
+            +b.SECTION.get-price
+                .container
+                    +e.block
+                        +e.block-top
+                            .typography
+                                p Пожалуйста, оставьте свои данные, наш специалист вышлет актуальный прайс в ближайшее время
+                            +e.intro-text
+                                +b.P.subtitle.color-primary Наши цены
+                                +b.H3.title Получить прайс
+                                +e.icon
+                                    +icon('profit')
+                        +e.FORM.form
+                            +b.field
+                                label Имя
+                                input(type="text")
+                            +b.field
+                                label E-mail
+                                input(type="text")
+                            +b.field
+                                label Телефон
+                                input(type="text")
+                            +b.BUTTON.btn(class="--primary") Получить прайс
+        include ../includes/modules/footer
+
+block script
+    //-script(src="assets/js/vendors.js")
+    script(src="assets/js/app.js")

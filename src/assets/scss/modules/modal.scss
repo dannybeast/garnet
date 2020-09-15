@@ -1,0 +1,252 @@
+$time: 320ms;
+$ease: ease;
+
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: "";
+
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
+
+    @if $i < $max {
+      $animations: #{$animations + ", "};
+    }
+  }
+
+  animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+@include keyframes(fadeIn) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@include keyframes(fadeOut) {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@mixin transition($val...) {
+  -webkit-transition: $val;
+  -moz-transition: $val;
+  -ms-transition: $val;
+  -o-transition: $val;
+  transition: $val;
+}
+
+@mixin transform($val...) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  -o-transform: $val;
+  transform: $val;
+}
+
+.modal-body {
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    position: fixed;
+    display: block;
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 999999;
+    background: rgba(#fff, 0.98);
+  }
+
+  &:before {
+    @include animation(fadeIn $time $ease);
+    @include transition(opacity $ease $time);
+  }
+
+  &.modal-fadeOut {
+    &:before {
+      opacity: 0;
+    }
+  }
+}
+
+.modal {
+  @include transition(all $ease 0.01s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-flow: row wrap;
+  opacity: 0;
+  height: 0;
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100vh;
+  visibility: hidden;
+  padding-top: 65px;
+  padding-bottom: 30px;
+  @include sm-block() {
+    padding: 0;
+  }
+  &.modal-visible {
+    opacity: 1;
+    height: auto;
+    visibility: visible;
+    bottom: 0;
+  }
+}
+
+.modal-inner {
+  @include transition(all ease-in 0.2s);
+  @include transform(translateY(-50px));
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  max-width: 530px;
+  opacity: 0;
+  border-radius: 15px;
+
+  @include sm-block() {
+    border-radius: 0;
+  }
+
+  &.modal-reveal {
+    @include transform(translateY(0));
+    opacity: 1;
+  }
+
+  &__close {
+    transition: color 320ms ease;
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: -45px;
+    cursor: pointer;
+
+    svg {
+      width: 26px;
+      height: 26px;
+      fill: #000;
+    }
+
+    &:hover {
+      svg {
+        fill: $neutral-primary;
+      }
+    }
+
+    @include sm-block() {
+      right: 10px;
+      top: 10px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+// custom
+.modal-title {
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+
+  @include sm-block() {
+    font-size: 24px;
+  }
+}
+
+.modal-inner {
+  width: 100%;
+  $radius: 0px;
+  background: #f1f1f1;
+  $parent: &;
+  .field {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .typography {
+    font-size: 14px;
+  }
+
+  .checkbox {
+    font-size: 13px;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .field--row label:not(.select) {
+    width: 110px;
+
+    @include sm-block() {
+      width: 100%;
+    }
+  }
+
+
+}
+
+.modal-header {
+  padding: 20px 30px;
+  &--border-bottom {
+    border-bottom: 2px solid #fff;
+  }
+}
+.modal-content {
+  padding: 30px 30px;
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  margin-top: -10px;
+  & > * {
+    margin: 10px;
+  }
+  &--center {
+    justify-content: center;
+  }
+}
+
+// -

@@ -5,13 +5,6 @@ export default function() {
     let navCloned = nav.cloneNode(true);
     //let headerButtonsCloned = headerButtons.cloneNode(true);
 
-    var $header = document.querySelector(".header");
-    let headerHeight;
-    if ($header) {
-      var rect = $header.getBoundingClientRect();
-      headerHeight = rect.height;
-    }
-
     document.querySelector(".header__row").insertAdjacentHTML(
       "beforeend",
       `
@@ -35,9 +28,6 @@ export default function() {
 
     // Append menu
     document.body.appendChild(mobileMenu);
-
-    mobileMenu.style.top = `${headerHeight}px`;
-    mobileMenu.style.height = `calc(100% - ${headerHeight}px)`;
 
     navBtn.addEventListener("click", function(e) {
       document

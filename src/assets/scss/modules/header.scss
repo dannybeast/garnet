@@ -27,6 +27,7 @@
   }
   .nav-button {
     display: none;
+    background: transparent;
     margin-left: 15px;
     @include lg-block() {
       display: flex;
@@ -42,8 +43,22 @@
     align-items: center;
     padding-top: 30px;
     padding-bottom: 30px;
+    @include sm-block() {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
   }
   &__nav {
+    @include to(1320px) {
+      margin-left: auto;
+      margin-right: 30px;
+    }
+    @include to(1120px) {
+      margin-right: 0;
+    }
+    @include lg-block() {
+      display: none;
+    }
     ul {
       display: flex;
       align-items: center;
@@ -69,6 +84,25 @@
       }
       &:hover {
         color: $neutral-primary;
+      }
+    }
+  }
+  .contact-item {
+    &:first-of-type {
+      @include to(1320px) {
+        display: none;
+      }
+    }
+    &:last-of-type {
+      @include to(1120px) {
+        display: none;
+      }
+      @include lg-block() {
+        display: flex;
+        margin-left: auto;
+      }
+      @include sm-block() {
+        display: none;
       }
     }
   }

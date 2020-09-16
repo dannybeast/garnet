@@ -201,29 +201,11 @@ textarea {
   }
 
   &:hover {
-    border-color: rgba($primary-color, 0.3);
+    border-color: rgba($primary-color, 0.8);
   }
 
   &:focus {
-    border-color: rgba($primary-color, 0.3);
-  }
-
-  &.field-stroke {
-    border: none;
-    background: transparent;
-    padding-left: 0;
-    font-size: 18px;
-    height: 35px;
-    border-radius: 0;
-    border-bottom: 2px solid rgba(#000, 0.2);
-    &:hover {
-      border-bottom: 2px solid rgba(#000, 0.35);
-    }
-  }
-  &.field-border {
-    background: #fff;
-    color: rgba(#000, 0.6);
-    border-color: rgba(#000, 0.2) !important;
+    border-color: rgba($primary-color, 0.8);
   }
 }
 
@@ -248,7 +230,7 @@ input[type="color"] {
     font-size: 12px;
   }
   label:not(.select) {
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     font-family: $mainFont;
 
     br {

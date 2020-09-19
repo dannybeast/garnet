@@ -1,5 +1,5 @@
 import Notice from "../modules/notifications";
-import { Email, Data } from "./smtp";
+//import { Email, Data } from "./smtp";
 import $ from "jquery";
 let form = ".js-price-form";
 
@@ -28,20 +28,16 @@ $(form).validate({
     let $form = $(form);
     let formData = $form.serializeArray();
 
-    Email.send({
-      SecureToken: Data.SecureToken,
-      To: Data.to,
-      From: Data.from,
-      Subject: "Заявка на получение прайса",
-      Body: `
-            <p>Имя: <strong>${formData[0].value}</strong></p>
-            <p>E-mail: <strong>${formData[1].value}</strong></p>
-            <p>Номер телефона: <strong>${formData[2].value}</strong></p>
-            
-            `,
-    }).then((message) => {
-      Notice.openSuccess("Заявка отправлена!");
-      $form.get(0).reset();
+    formData.push({ name: "type", value: "price" });
+
+    $.ajax({
+      type: "POST",
+      url: "utility/send-email",
+      data: formData,
+      success: function(response) {
+        Notice.openSuccess("Заявка отправлена!");
+        $form.get(0).reset();
+      },
     });
 
     return false;

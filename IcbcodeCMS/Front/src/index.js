@@ -23,9 +23,9 @@ import { scrollTo } from "./js/modules/scrollTo";
 import contactsMap from "./js/modules/contactsMap";
 
 // Forms
-// import "./js/forms/validation";
-// import "./js/forms/request";
-// import "./js/forms/price";
+import "./js/forms/validation";
+import "./js/forms/request";
+import "./js/forms/price";
 
 $(document).ready(function () {
   animations();

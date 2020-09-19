@@ -260,6 +260,60 @@
     <Content Include="content\cms\js\redactor.lang.ru.js" />
     <Content Include="content\cms\js\script.js" />
     <Content Include="content\cms\js\tag-it.js" />
+    <Content Include="Front\dist\assets\css\app.css" />
+    <Content Include="Front\dist\assets\icons\001-apple.svg" />
+    <Content Include="Front\dist\assets\icons\001-arrow.svg" />
+    <Content Include="Front\dist\assets\icons\001-move-to-next.svg" />
+    <Content Include="Front\dist\assets\icons\001-package.svg" />
+    <Content Include="Front\dist\assets\icons\001-right.svg" />
+    <Content Include="Front\dist\assets\icons\002-settings.svg" />
+    <Content Include="Front\dist\assets\icons\003-care.svg" />
+    <Content Include="Front\dist\assets\icons\003-harvest.svg" />
+    <Content Include="Front\dist\assets\icons\004-calendar.svg" />
+    <Content Include="Front\dist\assets\icons\agriculture.svg" />
+    <Content Include="Front\dist\assets\icons\apple.svg" />
+    <Content Include="Front\dist\assets\icons\apples.svg" />
+    <Content Include="Front\dist\assets\icons\calendar.svg" />
+    <Content Include="Front\dist\assets\icons\cross.svg" />
+    <Content Include="Front\dist\assets\icons\doc.svg" />
+    <Content Include="Front\dist\assets\icons\left-arrow.svg" />
+    <Content Include="Front\dist\assets\icons\love.svg" />
+    <Content Include="Front\dist\assets\icons\mail.svg" />
+    <Content Include="Front\dist\assets\icons\phone.svg" />
+    <Content Include="Front\dist\assets\icons\place.svg" />
+    <Content Include="Front\dist\assets\icons\profit.svg" />
+    <Content Include="Front\dist\assets\icons\sprite.svg" />
+    <Content Include="Front\dist\assets\images\about-after.png" />
+    <Content Include="Front\dist\assets\images\about.jpg" />
+    <Content Include="Front\dist\assets\images\apple-slider\1.png" />
+    <Content Include="Front\dist\assets\images\apple-slider\1.svg" />
+    <Content Include="Front\dist\assets\images\footer-before.png" />
+    <Content Include="Front\dist\assets\images\icons\apple-buy.png" />
+    <Content Include="Front\dist\assets\images\icons\apple-details.png" />
+    <Content Include="Front\dist\assets\images\icons\apple-price.png" />
+    <Content Include="Front\dist\assets\images\icons\pentagon-active.png" />
+    <Content Include="Front\dist\assets\images\icons\pentagon.png" />
+    <Content Include="Front\dist\assets\images\intro.jpg" />
+    <Content Include="Front\dist\assets\images\logo\logo.png" />
+    <Content Include="Front\dist\assets\images\pentagon-line.png" />
+    <Content Include="Front\dist\assets\images\products\1.png" />
+    <Content Include="Front\dist\assets\images\products\2.png" />
+    <Content Include="Front\dist\assets\images\products\3.png" />
+    <Content Include="Front\dist\assets\images\products\4.png" />
+    <Content Include="Front\dist\assets\images\products\5.png" />
+    <Content Include="Front\dist\assets\images\products\6.png" />
+    <Content Include="Front\dist\assets\images\products\7.png" />
+    <Content Include="Front\dist\assets\images\quotes\quote-left.png" />
+    <Content Include="Front\dist\assets\images\quotes\quote-right.png" />
+    <Content Include="Front\dist\assets\images\social\instagram.png" />
+    <Content Include="Front\dist\assets\images\social\vk.png" />
+    <Content Include="Front\dist\assets\images\spinner.svg" />
+    <Content Include="Front\dist\assets\js\app.js" />
+    <Content Include="Front\dist\favicon.ico" />
+    <Content Include="Front\dist\index.html" />
+    <Content Include="Front\dist\report.html" />
+    <Content Include="Front\dist\robots.txt" />
+    <Content Include="Front\dist\sitemap.xml" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -276,7 +330,6 @@
   <ItemGroup>
     <Folder Include="Areas\CMS\Views\Cart\" />
     <Folder Include="content\cms\files\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\CMS\Views\web.config" />
@@ -303,8 +356,20 @@
     <Content Include="Areas\CMS\Views\Variable\Index.cshtml" />
     <Content Include="Areas\CMS\Views\View\Edit.cshtml" />
     <Content Include="Areas\CMS\Views\View\Index.cshtml" />
+    <Content Include="Front\dist\assets\css\app.css.gz" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI-Bold.woff" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI-BoldItalic.woff" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI-Italic.woff" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI-Light.woff" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI-SemiBold.woff" />
+    <Content Include="Front\dist\assets\fonts\SegoeUI\SegoeUI.woff" />
+    <Content Include="Front\dist\assets\icons\apples.svg.gz" />
+    <Content Include="Front\dist\assets\icons\sprite.svg.gz" />
+    <Content Include="Front\dist\assets\js\app.js.gz" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

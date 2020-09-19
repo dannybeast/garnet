@@ -1,0 +1,179 @@
+﻿@model IcbcodeContent
+@{
+
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@Model.Title</title>
+    <meta name="description" content="@Model.Description">
+    <meta name="keywords" content="@Model.Keywords">
+    <link rel="shortcut icon" href="~/Front/dist/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/Front/dist/assets/css/app.css">
+</head>
+<body>
+    <div class="loader"><img src="~/Front/dist/assets/images/spinner.svg" alt=""></div>
+    <main class="wrapper" id="app" data-emergence="hidden">
+        <!-- WEBSITE-->
+        <div class="content">
+            <div class="page-index">
+                <header class="header">
+                    <div class="container">
+                        <div class="header__row">
+                            <a class="header__logo" href="~/"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
+                            <nav class="header__nav">
+                                <ul>
+                                    <li>
+                                        <a href="about.html">О компании</a>
+                                    </li>
+                                    <li>
+                                        <a class="js-scrollTo-products">Продукция</a>
+                                    </li>
+                                    <li>
+                                        <a href="news.html">Новости</a>
+                                    </li>
+                                    <li>
+                                        <a href="documents.html">Документы</a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <svg class="svg-icon">
+                                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-place"></use>
+                                    </svg>
+                                </div>
+                                <div class="contact-item__content">
+                                    Краснодарский край, х. Привольный, ул. Мира, д. 78
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <svg class="svg-icon">
+                                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-phone"></use>
+                                    </svg>
+                                </div>
+                                <div class="contact-item__content">
+                                    <a class="contact-item__phone" href="tel:+79181701095">+7 (918) 170-10-95</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                @RenderBody()
+            </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer__top">
+                        <h3 class="title">
+                            Наши контакты
+                        </h3>
+                        <div class="typography">
+                            <p>Контакты компании "Гранат”</p>
+                        </div>
+                        <div class="follow">
+                            <ul>
+                                <li>
+                                    <a href="#" target="_blank"><img src="~/Front/dist/assets/images/social/instagram.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><img src="~/Front/dist/assets/images/social/vk.png" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer__row">
+                        <div class="footer__col">
+                            <ul class="contacts">
+                                <li>
+                                    <div class="contacts__icon">
+                                        <svg class="svg-icon">
+                                            <use href="~/Front/dist/assets/icons/sprite.svg#icon-phone"></use>
+                                        </svg>
+                                    </div><a class="not-decoration-link" href="tel:+79181701095">+7 (918) 170-10-95</a>
+                                </li>
+                                <li>
+                                    <div class="contacts__icon">
+                                        <svg class="svg-icon">
+                                            <use href="~/Front/dist/assets/icons/sprite.svg#icon-mail"></use>
+                                        </svg>
+                                    </div><a href="mailto:miсhurincompany@gmail.com">miсhurincompany@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer__col">
+                            <div class="footer__address">
+                                <p>352154, Краснодарский край, Кавказский район, х. Привольный, ул. Мира, д. 78</p><a class="address-link js-modal" data-modal="map">
+                                    <span>Показать на карте</span>
+                                    <svg class="svg-icon">
+                                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-place"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__bottom">
+                        <a class="footer__logo" href="index.html"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
+                        <p>© 2020, Все права защищены, Компания «Гранат».</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- MODALS-->
+        <div class="modal" id="request">
+            <div class="modal-inner">
+                <div class="modal-inner__close js-close-modal">
+                    <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-cross"></use>
+                    </svg>
+                </div>
+                <div class="modal-header modal-header--border-bottom">
+                    <h3 class="modal-title">
+                        <span>Оставить заявку</span>
+                    </h3>
+                </div>
+                <form class="js-request-form">
+                    <div class="modal-content">
+                        <div class="field">
+                            <label>Имя</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="field">
+                            <label>E-mail</label>
+                            <input type="text" name="email">
+                        </div>
+                        <div class="field">
+                            <label>Телефон</label>
+                            <input class="js-phone-mask" type="text" name="phone" placeholder="+7 (___) ___-__-__">
+                        </div>
+                    </div>
+                    <div class="modal-footer modal-footer--center">
+                        <button class="btn btn--primary">
+                            Отправить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="map">
+            <div class="modal-inner">
+                <div class="modal-inner__close js-close-modal">
+                    <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-cross"></use>
+                    </svg>
+                </div>
+                <div class="modal-content">
+                    <div class="map" data-address="352154, Краснодарский край, Кавказский район, х. Привольный, ул. Мира, д. 78"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="~/Front/dist/assets/js/app.js"></script>
+</body>
+</html>

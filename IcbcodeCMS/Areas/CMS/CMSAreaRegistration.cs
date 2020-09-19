@@ -20,8 +20,8 @@ namespace IcbcodeCMS.Areas.CMS
 
             context.MapRoute(
                 "",
-                "utility/dooo",
-                new { controller = "Cart", action = "Doooo" }
+                "utility/send-email",
+                new { controller = "Cart", action = "SendEmail" }
             );
 
             // cart

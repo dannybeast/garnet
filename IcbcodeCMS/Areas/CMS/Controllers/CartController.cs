@@ -15,64 +15,29 @@ namespace IcbcodeCMS.Areas.CMS.Controllers
     public class CartController : Controller
     {
         [HttpPost()]
-        public ActionResult Doooo()
+        public ActionResult SendEmail(string name, string phone, string email, string type)
         {
-            
+            string title = null; StringBuilder body = new StringBuilder();
+
+            if (type == "bid")
+            {
+                title = "Заявка с сайта garnet";
+            }
+            else if (type == "price")
+            {
+                title = "Получить прайс с сайта garnet";
+            }
+
+            body.Append($"Имя: {name}<br/>");
+            body.Append($"Телефон: {phone}<br/>");
+            body.Append($"Email: {email}<br/>");
+
+            if (title != null)
+            {
+                IcbcodeUtility.SendEmail(null, null, title, body.ToString());
+            }
 
             return new EmptyResult();
-        }
-
-        public decimal GetDiscountInRub(string code)
-        {
-            var promocode = IcbcodeContent.Get(new string[] { "promokodi" }, new string[] { "promokod" }, query: $"content_name = '{code}'").FirstOrDefault();
-
-            IcbcodeCart shopping_cart = new IcbcodeCart(HttpContext);
-
-            decimal result = 0;
-
-            if (promocode != null && shopping_cart.GetTotal() >= Convert.ToDecimal(promocode.UserDefined.minimaljnaya_summa_zakaza_rub) && shopping_cart.GetCount() >= Convert.ToInt32(promocode.UserDefined.minimaljnoe_ko_vo_tovarov_v_zakaze_sht) && (promocode.UserDefined.dejstvitelen_do == null || (promocode.UserDefined.dejstvitelen_do != null && Convert.ToDateTime(promocode.UserDefined.dejstvitelen_do) >= DateTime.Now)))
-            {
-                foreach (var item in shopping_cart.Items)
-                {
-                    var product = IcbcodeContent.Get(item.item_id);
-
-                    if (product.Url.Contains((string)promocode.UserDefined.url_razdela))
-                    {
-                        int discount = 0; var promo_discount = Convert.ToInt32(product.UserDefined.skidka);
-
-                        if (product.UserDefined.staraya_cena_rub != 0 && product.UserDefined.staraya_cena_rub != product.UserDefined.cena_rub)
-                        {
-                            decimal z = (decimal)product.UserDefined.staraya_cena_rub - (decimal)product.UserDefined.cena_rub;
-
-                            decimal x = (decimal)product.UserDefined.staraya_cena_rub / (decimal)100;
-
-                            discount = Convert.ToInt32((Math.Floor(z / x)));
-                        }
-
-                        if (discount < promo_discount)
-                        {
-                            result += Math.Floor((item.item_price / 100 * promo_discount)) * item.item_count;
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        private decimal GetDeliveryPrice(string deliveryMethod)
-        {
-            switch (deliveryMethod)
-            {
-                case "IML":
-                    return 270;
-
-                case "Почта России":
-                    return 340;
-
-                default:
-                    return 270;
-            }
         }
 
         [HttpPost()]
@@ -128,7 +93,7 @@ namespace IcbcodeCMS.Areas.CMS.Controllers
                     body.AppendLine(string.Format("<tr><td><a href=\"{0}\">{1}</a><td>{6}</td><td>{5}</td></td><td>{2}</td><td>{3}</td><td>{4}</td></tr>", string.Format("{0}/{1}", Request.Url.Host, item.item_url), item.item_name, item.item_price, item.item_count, item.item_price * item.item_count, product.UserDefined.artikul, manufacturer));
                 }
 
-                decimal delivery_price = GetDeliveryPrice(delivery_type); price += delivery_price;
+                decimal delivery_price = 0; price += delivery_price;
 
                 body.AppendLine($"<tr><td>Доставка: {delivery_type}<td></td><td></td></td><td>{delivery_price}</td><td>1</td><td>{delivery_price}</td></tr>");
 
@@ -283,9 +248,9 @@ namespace IcbcodeCMS.Areas.CMS.Controllers
         {
             IcbcodeCart shopping_cart = new IcbcodeCart(HttpContext);
 
-            decimal discount = GetDiscountInRub(shopping_cart.Promocode);
+            decimal discount = 0;
 
-            var item = new { delivery_price = GetDeliveryPrice(shopping_cart.DeliveryMethod), product_count = shopping_cart.GetCount(), product_amount = (shopping_cart.GetTotal() - discount).ToString("N0"), discount = discount };
+            var item = new { delivery_price = 0, product_count = shopping_cart.GetCount(), product_amount = (shopping_cart.GetTotal() - discount).ToString("N0"), discount = discount };
 
             return Json(item, JsonRequestBehavior.AllowGet);
         }

@@ -1,6 +1,8 @@
 ﻿@model IcbcodeContent
 @{
+    var menus = IcbcodeContent.Get(new string[] { "glavnoe-menyu" });
 
+    var settings = IcbcodeVariable.All(IcbcodeUtility.CurrentDomain);
 }
 
 <!DOCTYPE html>
@@ -26,18 +28,12 @@
                             <a class="header__logo" href="~/"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
                             <nav class="header__nav">
                                 <ul>
+                                    @foreach (var item in menus)
+                                    {
                                     <li>
-                                        <a href="about.html">О компании</a>
+                                        <a href="@item.Url">@item.Link</a>
                                     </li>
-                                    <li>
-                                        <a class="js-scrollTo-products">Продукция</a>
-                                    </li>
-                                    <li>
-                                        <a href="news.html">Новости</a>
-                                    </li>
-                                    <li>
-                                        <a href="documents.html">Документы</a>
-                                    </li>
+                                    }
                                     <li>
                                         <a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
                                     </li>
@@ -50,7 +46,7 @@
                                     </svg>
                                 </div>
                                 <div class="contact-item__content">
-                                    Краснодарский край, х. Привольный, ул. Мира, д. 78
+                                    @settings["kratkij-adres"]
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -60,7 +56,7 @@
                                     </svg>
                                 </div>
                                 <div class="contact-item__content">
-                                    <a class="contact-item__phone" href="tel:+79181701095">+7 (918) 170-10-95</a>
+                                    <a class="contact-item__phone" href="tel:@settings["telefon"]">@settings["telefon"]</a>
                                 </div>
                             </div>
                         </div>
@@ -80,10 +76,10 @@
                         <div class="follow">
                             <ul>
                                 <li>
-                                    <a href="#" target="_blank"><img src="~/Front/dist/assets/images/social/instagram.png" alt=""></a>
+                                    <a href="@settings["instagram"]" rel="nofollow" target="_blank"><img src="~/Front/dist/assets/images/social/instagram.png" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="#" target="_blank"><img src="~/Front/dist/assets/images/social/vk.png" alt=""></a>
+                                    <a href="@settings["vkontakte"]" rel="nofollow" target="_blank"><img src="~/Front/dist/assets/images/social/vk.png" alt=""></a>
                                 </li>
                             </ul>
                         </div>
@@ -96,20 +92,20 @@
                                         <svg class="svg-icon">
                                             <use href="~/Front/dist/assets/icons/sprite.svg#icon-phone"></use>
                                         </svg>
-                                    </div><a class="not-decoration-link" href="tel:+79181701095">+7 (918) 170-10-95</a>
+                                    </div><a class="not-decoration-link" href="tel:@settings["telefon"]">@settings["telefon"]</a>
                                 </li>
                                 <li>
                                     <div class="contacts__icon">
                                         <svg class="svg-icon">
                                             <use href="~/Front/dist/assets/icons/sprite.svg#icon-mail"></use>
                                         </svg>
-                                    </div><a href="mailto:miсhurincompany@gmail.com">miсhurincompany@gmail.com</a>
+                                    </div><a href="mailto:@settings["email"]">@settings["email"]</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="footer__col">
                             <div class="footer__address">
-                                <p>352154, Краснодарский край, Кавказский район, х. Привольный, ул. Мира, д. 78</p><a class="address-link js-modal" data-modal="map">
+                                <p>@settings["polnij-adres"]</p><a class="address-link js-modal" data-modal="map">
                                     <span>Показать на карте</span>
                                     <svg class="svg-icon">
                                         <use href="~/Front/dist/assets/icons/sprite.svg#icon-place"></use>
@@ -119,8 +115,8 @@
                         </div>
                     </div>
                     <div class="footer__bottom">
-                        <a class="footer__logo" href="index.html"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
-                        <p>© 2020, Все права защищены, Компания «Гранат».</p>
+                        <a class="footer__logo" href="~/"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
+                        <p>@settings["kopirajt"]</p>
                     </div>
                 </div>
             </footer>
@@ -169,7 +165,7 @@
                     </svg>
                 </div>
                 <div class="modal-content">
-                    <div class="map" data-address="352154, Краснодарский край, Кавказский район, х. Привольный, ул. Мира, д. 78"></div>
+                    <div class="map" data-address="@settings["polnij-adres"]"></div>
                 </div>
             </div>
         </div>

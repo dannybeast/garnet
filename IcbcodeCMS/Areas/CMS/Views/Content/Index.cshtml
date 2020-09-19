@@ -1,0 +1,174 @@
+﻿@{
+    bool content_publish_exsists = false; bool template_allow_subpartitions_exists = false; bool content_view_exists = false;
+
+    foreach (var item in ViewBag.items)
+    {
+        if (item.content_publish != null)
+        {
+            content_publish_exsists = true;
+        }
+
+        if (item.template_allow_subpartitions && !((List<dynamic>)ViewBag.blcoks).Exists(x => x.block_content_root == item.content_id))
+        {
+            template_allow_subpartitions_exists = true;
+        }
+
+        if (item.content_view != null)
+        {
+            content_view_exists = true;
+        }
+    }
+
+    List<dynamic> names = new List<dynamic>();
+    using (ContentRepository content_repository = new ContentRepository())
+    {
+        long totals;
+
+        names = content_repository.GetActive((string[])null, (long[])null, new string[] { "znachenie-spravochnika", "sposob-dostavki" }, null, 1, Int64.MaxValue, out totals, null, null, null);
+    }
+
+    ViewBag.Title = ViewBag.block.block_friendly_name;
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="breadcrumbs">
+    @for (int i = 0; i < ViewBag.nav.Count; i++)
+    {
+        if (i != 0)
+        {
+            @:<span>&rarr;</span>
+        }
+
+        if (ViewBag.nav.Count - 1 != i)
+        {
+            <a href="@Url.Action("Index", "Content", new { block_id = ViewBag.block_id, content_root = (ViewBag.nav[i] == null ? null : ViewBag.nav[i].content_id) })">@(ViewBag.nav[i] == null ? ViewBag.block.block_friendly_name : ViewBag.nav[i].content_name)</a>
+        }
+        else if (ViewBag.nav.Count > 1)
+        {
+            <span><b>@(ViewBag.nav[i] == null ? ViewBag.block.block_friendly_name : ViewBag.nav[i].content_name)</b></span>
+        }
+    }
+</div>
+
+
+<div id="nav_panel">
+    <a href="@Url.Action("Edit", "Content", new { block_id = ViewBag.block_id, content_root = ViewBag.content_root })"><button class="button_element">Добавить страницу</button></a>
+    @if (ViewBag.block_id == 33436)
+    {
+        <a href="@Url.Action("Import", "Content", new { block_id = ViewBag.block_id, content_root = ViewBag.content_root })"><button class="button_element">Импорт из Excel</button></a>
+    }
+    <a style="display:none;" id="copy" href="@Url.Action("Copy", "Content", new { retUrl = Request.Url.PathAndQuery })"><button class="button_element">Копировать</button></a>
+    <a style="@(Session["copy_ids"] == null ? "display:none;" : null)" id="paste" href="@Url.Action("Paste", "Content", new { block_id = ViewBag.block_id, content_id = ViewBag.content_root, retUrl = Request.Url.PathAndQuery })"><button class="button_element">Вставить</button></a>
+</div>
+
+@if (ViewBag.items.Count == 0)
+{
+    <p><b>Данных нет</b></p>
+}
+else
+{
+    <table class="content_table" width="100%" cellpadding="0" cellspacing="0">
+        <tr class="ui-widget-header">
+            <th class="first"><input class="chkall" type="checkbox" /></th>
+            <th class="first">#</th>
+            <th class="first">Наименование</th>
+            <th class="first">Шаблон&nbsp;данных</th>
+            @if (content_publish_exsists)
+            {
+                <th>Дата&nbsp;публикации</th>
+            }
+            @if (template_allow_subpartitions_exists)
+            {
+                <th>&nbsp;</th>
+            }
+            @if (content_view_exists)
+            {
+                <th>&nbsp;</th>
+            }
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tbody @if ((ViewBag.template_allow_sort == null ? ViewBag.block.block_allow_sort : ViewBag.template_allow_sort)) { <text> class="sortable" </text> } data-update-url="@Url.Action("UpdateOrder", "Content")">
+            @foreach (var item in ViewBag.items)
+            {
+                var color = "";
+
+                if (!item.content_active) { color = "color:red;"; }
+
+                <tr style="@color">
+                    <td class="first" style="width:1%;"><input class="chk" type="checkbox" value="@item.content_id" /></td>
+                    <td class="first" style="width:1%;">@item.content_id</td>
+                    <td class="first">
+                        @if (item.content_main)
+                        {
+                            <b>@item.content_name</b>
+                        }
+                        else
+                        {
+                            @item.content_name
+                        }
+                        <input type="hidden" name="id" value="@item.content_id" />
+                    </td>
+                    <td class="first">@item.template_friendly_name</td>
+                    @if (content_publish_exsists)
+                    {
+                        <td>
+                            @if (item.content_publish != null)
+                            {
+                                @item.content_publish.ToString("yyyy-MM-dd HH:mm")
+                            }
+                        </td>
+                    }
+                    @if (template_allow_subpartitions_exists)
+                    {
+                        <td>
+                            @if (item.template_allow_subpartitions && !((List<dynamic>)ViewBag.blcoks).Exists(x => x.block_content_root == item.content_id))
+                            {
+                                <a href="@Url.Action("Index", "Content", new { block_id = ViewBag.block_id, content_root = @item.content_id })">Подразделы</a>
+                            }
+                        </td>
+                    }
+                    @if (content_view_exists)
+                    {
+                        <td>
+                            @if (item.content_view != null)
+                            {
+                                <a target="_blank" href="@Url.Content(item.content_main ? "~/" : item.content_url)">Показать&nbsp;на&nbsp;сайте</a>
+                            }
+                        </td>
+                    }
+                    <td>
+                        <a href="@Url.Action("Edit", "Content", new { content_id = item.content_id, block_id = ViewBag.block_id, content_root = ViewBag.content_root })">Редактировать</a>
+                    </td>
+                    <td>
+                        @if (item.content_allow_deleted)
+                        {
+                            <a href="@Url.Action("Remove", "Content", new { content_id = item.content_id, block_id = ViewBag.block_id, content_root = ViewBag.content_root })" onclick="return confirm('Вы уверены что хотите удалить страницу?');">Удалить</a>
+                        }
+                        else
+                        {
+                            <a href="#" style="color:Gray;" onclick="return false;">Удалить</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (!((ViewBag.template_allow_sort == null ? ViewBag.block.block_allow_sort : ViewBag.template_allow_sort)))
+{
+    <div id="pager">
+        @for (long i = 1; i <= ViewBag.totals; i++)
+        {
+            if (i == ViewBag.page)
+            {
+                <span class="ui-button ui-widget ui-state-hover ui-corner-all">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "Content", new { page = i, block_id = ViewBag.block_id, content_root = ViewBag.content_root })" class="ui-button ui-widget ui-state-default ui-corner-all">@i</a>
+            }
+        }
+    </div>
+}

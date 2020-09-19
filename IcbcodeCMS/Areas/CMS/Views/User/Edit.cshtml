@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового пользователя" : "Редактирование пользователя";
+    
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('select[name = "user_role"]').val() == '3' ? $('.for-content-manager').show() : $('.for-content-manager').hide();
+
+        $('select[name="user_role"]').change(function () {
+            $(this).val() == '3' ? $('.for-content-manager').show() : $('.for-content-manager').hide();
+        });
+
+        $('select[name="user_domain"]').change(function () {
+            location.href = '@Url.Action("Edit", "User", new { user_id = ViewBag.item == null ? -1 :  ViewBag.item.user_id})' + '&user_domain=' + $('select[name="user_domain"]').val();
+        });
+    });
+</script>
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "User")">Пользователи</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+
+<form action="@Url.Action("Edit", "User")" method="post">
+    <input type="hidden" name="user_id" value="@(ViewBag.item == null ? null : ViewBag.item.user_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="user_name" value="@(ViewBag.item == null ? null : ViewBag.item.user_name)" class="text_type required" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first"><b>Домен:</b></td>
+            <td>
+                <select name="user_domain" class="required">
+                    @foreach (var item in ViewBag.domains)
+                    {
+                    <option value="@item.domain_id" @if (ViewBag.current_domain_id == item.domain_id)
+                                                    {<text>selected="selected"</text>}>@(string.IsNullOrWhiteSpace(item.domain_comment) ? item.domain_name : item.domain_comment)</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="first"><b>Роль:</b></td>
+            <td>
+                <select name="user_role" class="required">
+                    @foreach (var item in ViewBag.user_roles)
+                    {
+                    <option value="@item.user_role_id" @if (ViewBag.item != null && ViewBag.item.user_role == item.user_role_id ) {<text>selected="selected"</text>}>@item.user_role_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="first"><b>Логин:</b></td>
+            <td><input type="text" name="user_login" @if(ViewBag.item != null){<text>readonly="readonly"</text>} value="@(ViewBag.item == null ? null : ViewBag.item.user_login)" class="text_type required" /></td>
+        </tr>
+        <tr>
+            <td class="first"><b>Пароль:</b></td>
+            <td><input type="password" name="user_password" value="@(ViewBag.item == null ? null : ViewBag.item.user_password)" class="text_type required" /></td>
+        </tr>
+        @{
+            string[] user_blocks = new string[0];
+
+            if (ViewBag.item != null && ViewBag.item.user_blocks != null)
+            {
+                user_blocks = ViewBag.item.user_blocks.Split(new[] { ',' });
+            }
+        }
+        <tr class="for-content-manager">
+            <td class="first"><b>Блоки:</b></td>
+            <td>
+                <select name="user_blocks" multiple="multiple">
+                    @foreach (var item in ViewBag.blocks)
+                    {
+                    <option value="@item.block_id" @if (user_blocks.Contains<string>((string)item.block_id.ToString())) {<text>selected="selected"</text>}>@item.block_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        @{
+            string[] user_var_groups = new string[0];
+
+            if (ViewBag.item != null && ViewBag.item.user_var_groups != null)
+            {
+                user_var_groups = ViewBag.item.user_var_groups.Split(new[] { ',' });
+            }
+        }
+        <tr class="for-content-manager">
+            <td class="first"><b>Переменные:</b></td>
+            <td>
+                <select name="user_var_groups" multiple="multiple">
+                    @foreach (var item in ViewBag.var_groups)
+                    {
+                    <option value="@item" @if (user_var_groups.Contains<string>((string)item)) {<text>selected="selected"</text>}>@item</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

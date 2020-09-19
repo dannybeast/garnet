@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Импорт данных из CSV";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<form action="@Url.Action("Import", "Content")" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="@ViewBag.content_root" name="content_root" />
+    <input type="hidden" value="@ViewBag.block_id" name="block_id" />
+    <input type="hidden" value="@ViewBag.domain_id" name="domain_id" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Файл:</b></td>
+            <td>
+                <input type="file" name="file" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first">&nbsp;</td>
+            <td>
+                <button type="submit" class="button_element">Импорт</button>
+            </td>
+        </tr>
+    </table>
+</form>

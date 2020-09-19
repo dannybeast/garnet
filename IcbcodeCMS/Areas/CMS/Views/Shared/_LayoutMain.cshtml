@@ -1,0 +1,123 @@
+﻿@{  
+    List<dynamic> blocks; dynamic user; dynamic domain;
+
+    using (UserRepository database = new UserRepository())
+    {
+        user = database.GetByLogin(User.Identity.Name);
+    }
+    
+    using (BlockRepository database = new BlockRepository())
+    {
+        blocks = database.All(user.user_domain);
+    }
+    
+    using(DomainRepository database = new DomainRepository())
+    {
+        domain = database.GetByID(user.user_domain);
+    }
+
+    string[] user_blocks = user.user_blocks.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+    string[] user_var_groups = user.user_var_groups.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@Url.Content("~/content/cms/icons/favicon.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/content/cms/css/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/cms/css/redmond/jquery-ui-1.9.0.custom.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/cms/css/jquery.tagit.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/jquery-1.8.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/jquery-ui-1.9.0.custom.js")"></script>
+    <link href="@Url.Content("~/content/cms/css/jquery.datetimepicker.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/jquery.datetimepicker.js")" charset="utf-8"></script>
+    <link rel="stylesheet" href="@Url.Content("~/content/cms/css/redactor.css")" />
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/redactor.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/redactor.lang.ru.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/jquery.iframe-transport.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/jquery.fileupload.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/icbcode.transliteration.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/tag-it.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/icbcode.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/cms/js/script.js")"></script>
+</head>
+<body>
+    <div id="wrapper" class="ui-widget ui-widget-content">
+        <div id="login_block">
+            <span class="user_name">@user.user_name (@user.user_login)</span>
+            <span>|</span>
+            @if ("icbcode_cms_developer, icbcode_cms_admin".Contains(user.user_role_name) || user_var_groups.Length > 0)
+            {
+            <div class="wr_settings">
+                <a href="#" class="settings">
+                    <span class="ui-state-default ui-icon ui-icon-gear"></span>Настройки
+                </a>
+                <div class="drop_down hidden ui-state-default">
+                @if ("icbcode_cms_developer".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "Domain")">Домены</a><br/>
+                }
+                @if ("icbcode_cms_developer".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "Block")">Блоки</a><br/>
+                }
+                @if ("icbcode_cms_developer".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "Template")">Шаблоны данных</a><br/>
+                }
+                @if ("icbcode_cms_developer".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "Field")">Поля</a><br/>
+                }
+                @if ("icbcode_cms_developer".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "View")">Представления</a><br/>
+                }
+                @if ("icbcode_cms_developer, icbcode_cms_admin, icbcode_cms_content_manager".Contains(user.user_role_name) || user_var_groups.Length > 0)
+                {
+                <a href="@Url.Action("Index", "Variable")">Переменные</a><br/>
+                }
+                @if ("icbcode_cms_developer, icbcode_cms_admin, icbcode_cms_content_manager".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "Tag")">Теги</a><br/>
+                }
+                @if ("icbcode_cms_developer, icbcode_cms_admin".Contains(user.user_role_name))
+                {
+                <a href="@Url.Action("Index", "User")">Пользователи</a><br/>
+                }
+                </div>
+            </div>
+            <span>|</span>
+            }
+            <a href="@Url.Action("SignOut", "Account")">Выход</a>
+            <span>|</span>
+            <a target="_blank" href="@Url.Content("~/")" class="last">На сайт</a>
+        </div>
+        <a href="@Url.Action("Index", "Snapshot")" class="logo">@(Request.Url.Host == "localhost" || string.IsNullOrWhiteSpace(domain.domain_comment) ? "Icbcode.CMS" : domain.domain_comment)</a>
+        <div class="clear"></div>
+        <div id="main_menu">
+            @foreach (var item in blocks)
+            {
+                if (item.block_separated)
+                {
+                    <br />
+                    continue;
+                }
+                
+                if("icbcode_cms_developer, icbcode_cms_admin".Contains(user.user_role_name) || user_blocks.Contains((string)item.block_id.ToString()))
+                {
+                <a href="@Url.Action(string.IsNullOrWhiteSpace(item.block_action) ? "Index" : (string)item.block_action, string.IsNullOrWhiteSpace(item.block_controller) ? "Content" : (string)item.block_controller, new { Area = string.IsNullOrWhiteSpace(item.block_area) ? "CMS" : (string)item.block_area, block_id = item.block_id })" class="ui-button ui-widget ui-state-default @if (Request.Url.AbsolutePath.Contains(Url.Action("Index", "Content")) && Request.Url.Query.Contains(string.Format("block_id={0}", item.block_id))){<text>ui-state-hover</text>}"><span>@item.block_friendly_name</span></a>
+                }
+            }
+        </div>
+        <div class="clear"></div>
+        <div id="content">
+            <h1>@ViewBag.Title</h1>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿#admin_panel{
+    background: #eee;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 20px;
+    font-family: sans-serif;
+    font-size: 12px;
+    color:#000;
+}
+#admin_panel a.close{
+    float:right;
+    display: block;
+    width: 70px;
+    text-align: right;
+    color:#000;
+    text-decoration: none !important;
+}
+#admin_panel a.close:hover{
+    color:#666;
+}
+#admin_panel a:link, #admin_panel a:active, #admin_panel a:visited{
+    text-decoration: underline;
+    color:#000;
+}
+#admin_panel a:hover{
+    text-decoration: none;
+}
+#admin_panel span.divider{
+    line-height: 1;
+    padding: 0 15px;
+}

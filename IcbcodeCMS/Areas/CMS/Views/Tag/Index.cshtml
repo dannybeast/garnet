@@ -1,0 +1,66 @@
+﻿@{
+    var fields = ((List<dynamic>)ViewBag.items).Select(x => new { field_friendly_name = x.field_friendly_name, field_name = x.field_name, field_id = x.field_id }).Distinct();
+    
+    ViewBag.Title = "Теги";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+@if(!string.IsNullOrWhiteSpace(ViewBag.field_name))
+{
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Tag")">Теги</a><span>&rarr;</span> 
+    <span><b>@fields.First().field_friendly_name</b></span> 
+</div>
+}
+
+@if(!string.IsNullOrWhiteSpace(ViewBag.field_name))
+{
+<div id="nav_panel">
+    <a href="@Url.Action("Edit", "Tag", new { field_id = @fields.First().field_id })"><button class="button_element">Добавить тег</button></a>
+</div>
+}
+    
+@if (ViewBag.items.Count == 0 || (ViewBag.items[0].tag_id == null && !string.IsNullOrWhiteSpace(ViewBag.field_name)))
+{
+<p><b>Данных нет</b></p>
+}
+else
+{
+<table class="content_table" width="100%"  cellpadding="0" cellspacing="0">
+    <tr class="ui-widget-header">
+        <th class="first">Наименование</th>
+        <th>&nbsp;</th>
+        @if(!string.IsNullOrWhiteSpace(ViewBag.field_name))
+        {
+        <th>&nbsp;</th>
+        }
+    </tr>
+    @if(string.IsNullOrWhiteSpace(ViewBag.field_name))
+    {
+        foreach (var item in fields)
+        {
+        <tr>
+            <td class="first">
+                @item.field_friendly_name
+            </td>
+            <td><a href="@Url.Action("Index", "Tag", new { field_name = item.field_name })">Редактировать</a></td>
+        </tr>
+        }
+    }
+    else
+    {
+        foreach (var item in ViewBag.items)
+        {
+        <tr>
+            <td class="first">
+                @item.tag_name
+            </td>
+            <td><a href="@Url.Action("Edit", "Tag", new { tag_id = item.tag_id, field_id = item.field_id })">Редактировать</a></td>
+            <td>
+                <a onclick="return confirm('Вы уверены что хотите удалить тег?');" href="@Url.Action("Remove", "Tag", new { tag_id = item.tag_id, field_name = item.field_name })">Удалить</a>
+            </td>
+        </tr>
+        }
+    }
+</table>
+}

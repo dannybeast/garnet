@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового тега" : "Редактирование тега";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Tag")">Теги</a><span>&rarr;</span>
+    <a href="@Url.Action("Index", "Tag", new { field_name = ViewBag.field.field_name })">@ViewBag.field.field_friendly_name</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+<form action="@Url.Action("Edit", "Tag")" method="post">
+    <input type="hidden" name="tag_id" value="@(ViewBag.item == null ? null : ViewBag.item.tag_id)" />
+    <input type="hidden" name="tag_field_name" value="@ViewBag.field.field_name" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="tag_name" value="@(ViewBag.item == null ? null : ViewBag.item.tag_name)" class="text_type required" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

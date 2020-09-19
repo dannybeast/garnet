@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового поля" : "Редактирование поля";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('#field_type').change(function () {
+            displayContentRoot();
+        });
+
+        displayContentRoot();
+    });
+
+    function displayContentRoot() {
+        if ($('#field_type').val() == 'tags') {
+            $('#tags_limit').show();
+            $('#inside_domain').show();
+        } else {
+            $('#tags_limit').hide();
+            $('#inside_domain').hide();
+        }
+
+        if ($('#field_type').val() == 'tags' || $('#field_type').val() == 'list' || $('#field_type').val() == 'multiplelist') {
+            $('#inside_domain').show();
+        } else {
+            $('#inside_domain').hide();
+        }
+
+        if ($('#field_type').val() == 'list' || $('#field_type').val() == 'multiplelist') {
+            $('#content_root').show();
+            $('#template_name').show();
+            $('#rel_field').show();
+        } else {
+            $('#content_root').hide();
+            $('#template_name').hide();
+            $('#rel_field').hide();
+        }
+    }
+</script>
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Field")">Поля</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+
+<form action="@Url.Action("Edit", "Field")" method="post">
+    <input type="hidden" name="field_id" value="@(ViewBag.item == null ? null : ViewBag.item.field_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="field_friendly_name" value="@(ViewBag.item == null ? null : ViewBag.item.field_friendly_name)" class="text_type required" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first">Объявление:</td>
+            <td>
+                <input @if(ViewBag.item != null && ViewBag.item.field_system){<text>readonly="readonly"</text>} type="text" name="field_name" value="@(ViewBag.item == null ? null : ViewBag.item.field_name)" class="text_type" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first"><b>Тип:</b></td>
+            <td>
+                <select id="field_type" name="field_type" class="required">
+                    @foreach (var item in new string[] { "string", "html", "decimal", "integer", "boolean", "date", "datetime", "list", "multiplelist", "tags", "image", "file" })
+                    {
+                        if (ViewBag.item != null && ViewBag.item.field_system && item != ViewBag.item.field_type) { continue; }
+                        <option value="@item" @if (ViewBag.item != null && item == ViewBag.item.field_type) {<text>selected="selected"</text>}>@item</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        @if(ViewBag.item == null || !ViewBag.item.field_system)
+        {
+        <tr>
+            <td class="first">Фильтр:</td>
+            <td>
+                @Html.CheckBox("field_is_filter", (ViewBag.item == null ? false : (bool)ViewBag.item.field_is_filter))
+            </td>
+        </tr>
+        }
+        <tr id="tags_limit">
+            <td class="first">Макс. количество тегов:</td>
+            <td>
+                <input type="text" name="filed_tags_limit" id="filed_tags_limit" value="@(ViewBag.item == null ? null : ViewBag.item.filed_tags_limit)" class="text_type only-digits" />
+            </td>
+        </tr>
+        <tr id="content_root">
+            <td class="first">Content root ID:</td>
+            <td>
+                <input type="text" name="filed_content_root" id="filed_content_root" value="@(ViewBag.item == null ? null : ViewBag.item.filed_content_root)" class="text_type only-digits" />
+            </td>
+        </tr>
+        <tr id="rel_field">
+            <td class="first">Зависит от поля:</td>
+            <td>
+                <input type="text" name="field_rel_field" id="field_rel_field" value="@(ViewBag.item == null ? null : ViewBag.item.field_rel_field)" class="text_type" />
+            </td>
+        </tr>
+        <tr id="template_name">
+            <td class="first">Шаблон данных (объявление):</td>
+            <td>
+                <input type="text" name="filed_template_name" id="filed_template_name" value="@(ViewBag.item == null ? null : ViewBag.item.filed_template_name)" class="text_type" />
+            </td>
+        </tr>
+        <tr id="inside_domain">
+            <td class="first">Внутри домена:</td>
+            <td>
+                @Html.CheckBox("field_inside_domain", (ViewBag.item == null ? true : (bool)ViewBag.item.field_inside_domain))
+            </td>
+        </tr>
+        <tr>
+            <td class="first">Описание:</td>
+            <td>
+                <input type="text" name="field_description" value="@(ViewBag.item == null ? null : ViewBag.item.field_description)" class="text_type" />
+            </td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

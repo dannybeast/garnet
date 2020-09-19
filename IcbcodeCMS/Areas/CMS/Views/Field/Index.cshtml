@@ -1,0 +1,62 @@
+﻿@{
+    Dictionary<string, List<dynamic>> groups = new Dictionary<string, List<dynamic>>();
+
+    foreach (var item in ViewBag.items)
+    {
+            if (!groups.ContainsKey(item.field_group))
+            {
+                groups.Add(item.field_group, new List<dynamic>());
+            }
+
+            groups[item.field_group].Add(item);
+    }
+    
+    ViewBag.Title = "Поля";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="nav_panel">
+    <a href="@Url.Action("Edit", "Field")"><button class="button_element">Добавить поле</button></a>
+</div>
+
+@if (ViewBag.items.Count == 0)
+{
+<p><b>Данных нет</b></p>
+}
+else
+{
+    foreach (var group in groups)
+    {
+    <h2>@group.Key</h2>
+    <table class="content_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr class="ui-widget-header">
+            <th class="first">Наименование</th>
+            <th class="first">Объявление</th>
+            <th class="first">Тип</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        @foreach (var item in group.Value)
+        {
+        <tr>
+            <td class="first">
+                @item.field_friendly_name
+            </td>
+            <td class="first">@item.field_name</td>
+            <td class="first">@item.field_type</td>
+            <td><a href="@Url.Action("Edit", "Field", new { field_id = item.field_id })">Редактировать</a></td>
+            <td>
+                @if (item.field_system)
+                {
+                    <a href="#" style="color:Gray;" onclick="return false;">Удалить</a>
+                }
+                else
+                {
+                    <a onclick="return confirm('Вы уверены что хотите удалить поле?');" href="@Url.Action("Remove", "Field", new { field_id = item.field_id })">Удалить</a>
+                }
+            </td>
+        </tr>
+        }
+    </table>
+    }
+}

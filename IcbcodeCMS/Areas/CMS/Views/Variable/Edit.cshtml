@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление новой переменной" : "Редактирование переменной";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        $('#var_type').change(function () {
+
+            $('#var_value').empty();
+
+            var var_type = $('#var_type').val();
+
+            switch (var_type) {
+                case 'Строка':
+                    $('#var_value').html('<input class="text_type" type="text" name="var_value" value="" />'); break;
+                case 'Файл':
+                    $('#var_value').html('<input class="text_type" type="file" name="var_value" />'); break;
+                case 'Текст':
+                    $('#var_value').html('<textarea class="text_type" cols="20" rows="5" name="var_value"></textarea>'); break;
+                case 'Цифры':
+                    $('#var_value').html('<input type="text" name="var_value" value="" class="text_type digits-only" />'); break;
+                case 'Да/Нет':
+                    $('#var_value').html('<input type="checkbox" name="var_value" value="true" /><input type="hidden" name="var_value" value="false" />'); break;
+                case 'Пароль':
+                    $('#var_value').html('<input class="text_type" type="password" name="var_value" value="" />'); break;
+                case 'HTML':
+                    $('#var_value').html('<textarea class="redactor" data-upload-image-url="@Url.Action("Upload", "Image")" rows="5" cols="5" name="var_value" style="width: 100%; height: 320px;"></textarea>'); $('.redactor').redactor(); break;
+            }
+        });
+        
+        $('input[name="var_group"]').autocomplete({
+            source: @(Html.Raw(string.Format("['{0}']", string.Join("','", ViewBag.groups.Count == 0 ? new string[0] : ViewBag.groups))))
+        });
+    });
+    
+</script>
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Variable")">Переменные</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+<form action="@Url.Action("Edit", "Variable")" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="var_id" value="@(ViewBag.item == null ? null : ViewBag.item.var_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="var_friendly_name" value="@(ViewBag.item == null ? null : ViewBag.item.var_friendly_name)" class="text_type required" />
+            </td>
+        </tr>
+        @if (ViewBag.item != null)
+        {
+        <tr>
+            <td class="first"><b>Объявление:</b></td>
+            <td><input type="text" name="var_name" value="@(ViewBag.item == null ? null : ViewBag.item.var_name)" readonly="readonly" class="text_type" /></td>
+        </tr>
+        }
+        @if (ViewBag.item == null)
+        {
+        <tr>
+            <td class="first">Тип:</td>
+            <td>
+                <select name="var_type" id="var_type">
+                    @foreach (string _type in new string[] { "Строка", "Текст", "Цифры", "Да/Нет", "Пароль", "HTML", "Файл" })
+                    {
+                    <option value="@_type">@_type</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        }
+        <tr>
+            <td class="first">Значение:</td>
+            <td id="var_value">
+            @if (ViewBag.item != null)
+            {
+                switch ((string)ViewBag.item.var_type)
+                {
+                    case "Строка":
+                        <input type="text" class="text_type" name="var_value" value="@(ViewBag.item == null ? null : ViewBag.item.var_value)" />
+                                            break;
+                    case "Файл":
+                        if(ViewBag.item != null)
+                        {
+                            if(!string.IsNullOrWhiteSpace(ViewBag.item.var_value))
+                            {
+                        <a href="@Url.Content(ViewBag.item.var_value)">@ViewBag.item.var_value</a>
+                            }
+                        }<input type="file" class="text_type" name="var_value" />
+                                            break;
+                    
+                    case "Текст":
+                        <textarea class="text_type" cols="20" rows="5" name="var_value">@(ViewBag.item == null ? null : ViewBag.item.var_value)</textarea>
+                                            break;
+
+                    case "Цифры":
+                        <input type="text" name="var_value" value="@(ViewBag.item == null ? null : ViewBag.item.var_value)" class="digits-only text_type" />
+                                            break;
+
+                    case "Да/Нет":
+                        <input type="checkbox" @if (ViewBag.item != null && Convert.ToBoolean(ViewBag.item.var_value))
+                                               {<text>checked="checked"</text>} name="var_value" value="true" /><input type="hidden" name="var_value" value="false" />
+                                               break;
+
+                    case "Пароль":
+                        <input type="password" class="text_type" name="var_value" value="@(ViewBag.item == null ? null : ViewBag.item.var_value)" />
+                                               break;
+                                        
+                    case "HTML":
+                        <textarea rows="5" cols="5" class="redactor" data-upload-image-url="@Url.Action("Upload", "Image")" name="var_value" style="width: 100%; height: 320px;">@(ViewBag.item == null ? null : Html.Raw(ViewBag.item.var_value))</textarea>
+                                                break;
+                }
+            }
+            
+            @if (ViewBag.item == null)
+            {
+                <input type="text" name="var_value" value="" class="text_type" />
+            }
+            </td>
+        </tr>
+        <tr>
+            <td class="first"><b>Группа:</b></td>
+            <td><input type="text" name="var_group" class="text_type required" value="@(ViewBag.item == null ? null : ViewBag.item.var_group)" /></td>
+        </tr>
+        <tr>
+            <td class="first">Комментарий:</td>
+            <td><input type="text" name="var_comment" value="@(ViewBag.item == null ? null : ViewBag.item.var_comment)" class="text_type" /></td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

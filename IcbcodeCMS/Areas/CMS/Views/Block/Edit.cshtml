@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового блока" : "Редактирование блока";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Block")">Блоки</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+
+<form action="@Url.Action("Edit", "Block")" method="post">
+    <input type="hidden" name="block_id" value="@(ViewBag.item == null ? null : ViewBag.item.block_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="block_friendly_name" value="@(ViewBag.item == null ? null : ViewBag.item.block_friendly_name)" class="text_type required" />
+            </td>
+        </tr>
+        @if (ViewBag.item != null)
+        {
+        <tr>
+            <td class="first"><b>Объявление:</b></td>
+            <td><input type="text" name="block_name" value="@(ViewBag.item == null ? null : ViewBag.item.block_name)" readonly="readonly" class="text_type" /></td>
+        </tr>
+        }
+        @if (ViewBag.templates != null)
+        {
+            string[] templates = new string[0];
+
+            if (ViewBag.item != null && ViewBag.item.block_templates != null)
+            {
+                templates = ViewBag.item.block_templates.Split(new[] { ',' });  
+            }
+        <tr>
+            <td class="first"><b>Шаблоны данных:</b></td>
+            <td>
+                <select name="block_templates" multiple="multiple" class="required">
+                    @foreach (var template in ViewBag.templates)
+                    {
+                    <option value="@template.template_id" @if (templates.Contains<string>((string)template.template_id.ToString())) {<text>selected="selected"</text>}>@template.template_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        }
+        <tr>
+            <td class="first">ID Корневой страницы блока:</td>
+            <td><input type="text" class="text_type only-digits" name="block_content_root" value="@(ViewBag.item == null ? null : ViewBag.item.block_content_root)" /></td>
+        </tr>
+        <tr>
+            <td class="first">Сортировка перетаскиванием:</td>
+            <td>
+                @Html.CheckBox("block_allow_sort", ViewBag.item == null ? true : (bool)ViewBag.item.block_allow_sort)
+            </td>
+        </tr>
+        <tr>
+            <td class="first">Поля сортировки:</td>
+            <td><input type="text" class="text_type" name="block_order_fields" value="@(ViewBag.item == null ? null : ViewBag.item.block_order_fields)" /></td>
+        </tr>
+        <tr>
+            <td class="first">Area:</td>
+            <td><input type="text" class="text_type" name="block_area" value="@(ViewBag.item == null ? null : ViewBag.item.block_area)" /></td>
+        </tr>
+        <tr>
+            <td class="first">Controller:</td>
+            <td><input type="text" class="text_type" name="block_controller" value="@(ViewBag.item == null ? null : ViewBag.item.block_controller)" /></td>
+        </tr>
+        <tr>
+            <td class="first">Action:</td>
+            <td><input type="text" class="text_type" name="block_action" value="@(ViewBag.item == null ? null : ViewBag.item.block_action)" /></td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

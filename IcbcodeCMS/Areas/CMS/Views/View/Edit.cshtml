@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового представления" : "Редактирование представления";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "View")">Представления</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+
+<form action="@Url.Action("Edit", "View")" method="post">
+    <input type="hidden" name="view_id" value="@(ViewBag.item == null ? null : ViewBag.item.view_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="view_friendly_name" value="@(ViewBag.item == null ? null : ViewBag.item.view_friendly_name)" class="text_type required" />
+            </td>
+        </tr>
+        @if (ViewBag.item != null)
+        {
+        <tr>
+            <td class="first"><b>Объявление:</b></td>
+            <td><input type="text" name="view_name" value="@(ViewBag.item == null ? null : ViewBag.item.view_name)" readonly="readonly" class="text_type" /></td>
+        </tr>
+        }
+        <tr>
+            <td class="first"><b>Путь к представлению:</b></td>
+            <td><input type="text" name="view_path" value="@(ViewBag.item == null ? null : ViewBag.item.view_path)" class="text_type required" /></td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

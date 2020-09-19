@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление нового шаблона данных" : "Редактирование шаблона данных";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Template")">Шаблоны данных</a><span>&rarr;</span> 
+    <span><b>@ViewBag.Title</b></span> 
+</div>
+
+<form action="@Url.Action("Edit", "Template")" method="post">
+    <input type="hidden" name="template_id" value="@(ViewBag.item == null ? null : ViewBag.item.template_id)" />
+    <table class="edit_table" width="100%"  cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="first"><b>Наименование:</b></td>
+            <td>
+                <input type="text" name="template_friendly_name" value="@(ViewBag.item == null ? null : ViewBag.item.template_friendly_name)" class="text_type required" />
+            </td>
+        </tr>
+        @if (ViewBag.item != null)
+        {
+        <tr>
+            <td class="first"><b>Объявление:</b></td>
+            <td><input type="text" name="template_name" value="@(ViewBag.item == null ? null : ViewBag.item.template_name)" readonly="readonly" class="text_type" /></td>
+        </tr>
+        }
+        <tr>
+            <td class="first">Показывать подразделы:</td>
+            <td>
+                @Html.CheckBox("template_allow_subpartitions", ViewBag.item == null ? false : (bool)ViewBag.item.template_allow_subpartitions)
+            </td>
+        </tr>
+        <tr>
+            <td class="first">Используемые представления:</td>
+            <td>
+                <select name="template_views" multiple="multiple" style="height:300px;">
+                    @foreach (var view in ViewBag.views)
+                    {
+                    <option value="@view.view_id" @if (ViewBag.item != null && ViewBag.item.template_views != null &&  ((string)ViewBag.item.template_views).Split(new string []{","}, StringSplitOptions.RemoveEmptyEntries).Contains((string)view.view_id.ToString())) {<text>selected="selected"</text>}>@view.view_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="first">Используемые поля:</td>
+            <td>
+                <select name="template_fields" multiple="multiple" style="height:300px;">
+                    @foreach (var field in ViewBag.fields)
+                    {
+                    <option value="@field.field_id" @if (ViewBag.item != null && ViewBag.item.template_fields != null &&  ((string)ViewBag.item.template_fields).Split(new string []{","}, StringSplitOptions.RemoveEmptyEntries).Contains((string)field.field_id.ToString())) {<text>selected="selected"</text>}>@field.field_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        @if (ViewBag.templates != null)
+        {
+            string[] templates = new string[0];
+
+            if (ViewBag.item != null && ViewBag.item.template_templates != null)
+            {
+                templates = ViewBag.item.template_templates.Split(new[] { ',' });  
+            }
+        <tr class="child-template-option">
+            <td class="first">Дочерние шаблоны данных:</td>
+            <td>
+                <select name="template_templates" multiple="multiple" style="height:300px;">
+                    @foreach (var template in ViewBag.templates)
+                    {
+                    <option value="@template.template_id" @if (templates.Contains<string>((string)template.template_id.ToString())) {<text>selected="selected"</text>}>@template.template_friendly_name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        }
+        <tr class="child-template-option">
+            <td class="first">Сортировка перетаскиванием:</td>
+            <td>
+                @Html.CheckBox("template_allow_sort", ViewBag.item == null ? true : (bool)ViewBag.item.template_allow_sort)
+            </td>
+        </tr>
+        <tr class="child-template-option">
+            <td class="first">Поля сортировки:</td>
+            <td><input type="text" class="text_type" name="template_order_fields" value="@(ViewBag.item == null ? null : ViewBag.item.template_order_fields)" /></td>
+        </tr>
+        <tr class="child-template-option">
+            <td class="first">Создать дочерние страницы:</td>
+            <td>
+                @Html.CheckBox("template_create_child", ViewBag.item == null ? false : (bool)ViewBag.item.template_create_child)
+            </td>
+        </tr>
+        <tr>
+            <td class="first"></td>
+            <td>
+                <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+                <button type="button" class="button_element" onclick="location.href='@Url.Action("Index")'">Отмена</button>
+            </td>
+        </tr>
+    </table>
+</form>

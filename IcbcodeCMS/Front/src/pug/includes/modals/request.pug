@@ -1,0 +1,20 @@
+#request.modal
+    +b.modal-inner
+        +e.close.js-close-modal
+            +icon('cross')
+        +b.modal-header(class="--border-bottom")
+            +b.H3.modal-title
+                span Оставить заявку
+        +b.FORM.js-request-form
+            .modal-content
+                +b.field
+                    label Имя
+                    input(type="text" name="name")
+                +b.field
+                    label E-mail
+                    input(type="text" name="email")
+                +b.field
+                    label Телефон
+                    input(type="text" name="phone" placeholder="+7 (___) ___-__-__").js-phone-mask
+            +b.modal-footer(class="--center")
+                +b.BUTTON.btn(class="--primary") Отправить

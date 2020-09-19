@@ -1,0 +1,680 @@
+﻿@{
+    ViewBag.Title = ViewBag.item == null ? "Добавление новой страницы" : "Редактирование страницы";
+
+    Dictionary<string, Dictionary<string, dynamic>> fields = new Dictionary<string, Dictionary<string, dynamic>>();
+
+    foreach (var item in ViewBag.fields)
+    {
+        if (!fields.ContainsKey((string)item.field_group))
+        {
+            fields.Add((string)item.field_group, new Dictionary<string, dynamic>());
+        }
+
+        fields[(string)item.field_group].Add((string)item.field_name, item);
+
+    }
+
+    Dictionary<string, long?> items = new Dictionary<string, long?>();
+
+    if (fields.ContainsKey("Пользовательские"))
+    {
+        foreach (var item in fields["Пользовательские"].Values.ToList())
+        {
+            var value = ViewBag.item == null ? null : ((IDictionary<string, object>)ViewBag.item)[item.field_name];
+
+            if (item.field_type == "list")
+            {
+                items.Add(item.field_name, value);
+            }
+        }
+    }
+
+    var rootContent = IcbcodeCMS.Areas.CMS.Models.Objects.IcbcodeContent.Get((long)(ViewBag.content_root ?? 0));
+
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutMain.cshtml";
+}
+
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+
+        $('.imageupload').fileupload({
+            autoUpload: true,
+            type: 'POST',
+            dataType: 'json',
+            maxFileSize: 50000000,
+            sequentialUploads: true,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            previewSourceFileTypes: /^image\/(gif|jpeg|png)$/,
+            done: function (e, data) {
+                if (data.result != null) {
+                    $('.photo_items[field-name="' + $(this).attr('field-name') + '"]').append('<div class="photo_item" data-image-id="' + data.result.image_id + '"><a href="#" class="delete_img">x</a><img class="ui-state-default" src="@Url.Content("~/content/cms/files/")' + data.result.image_id + data.result.image_extension + '?width=140&height=140&mode=auto" alt="" /><br/><input type="text" name="image_desc" data-image-id="' + data.result.image_id + '" class="text_type" /><input type="hidden" name="image_ids_for_desc" value="' + data.result.image_id + '" data-image-id="' + data.result.image_id + '" /></div>');
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('.image-progress[field-name="' + $(this).attr('field-name') + '"] .bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
+            start: function (e) {
+                $('.image-progress[field-name="' + $(this).attr('field-name') + '"]').show();
+            },
+            stop: function (e) {
+                $('.image-progress[field-name="' + $(this).attr('field-name') + '"]').slideUp('medium');
+            }
+        });
+
+        $('.fileupload').fileupload({
+            autoUpload: true,
+            type: 'POST',
+            dataType: 'json',
+            maxFileSize: 50000000,
+            sequentialUploads: true,
+            done: function (e, data) {
+                if(data.result != null){
+                    $('.file_items[field-name="' + $(this).attr('field-name') + '"]').append('<div class="file_item" data-file-id="' + data.result.file_id + '"><span class="ui-icon ui-icon-grip-dotted-vertical">&nbsp;</span><input type="text" style="width:500px;" name="file_desc" data-file-id="' + data.result.file_id + '" class="text_type" value="' + data.result.file_desc + '" />&nbsp;<a href="#" class="delete_file">удалить</a><input type="hidden" name="file_ids_for_desc" value="' + data.result.file_id + '" data-file-id="' + data.result.file_id + '" /></div>');
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('.file-progress[field-name="' + $(this).attr('field-name') + '"] .bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
+            start: function (e) {
+                $('.file-progress[field-name="' + $(this).attr('field-name') + '"]').show();
+            },
+            stop: function (e) {
+                $('.file-progress[field-name="' + $(this).attr('field-name') + '"]').slideUp('medium');
+            }
+        });
+
+        $('.photo_items').each(function (index) {
+
+            var current_photo_items = $(this);
+
+            $.ajax({
+                url: '@Url.Action("Load", "Image")',
+                type: 'POST',
+                data: 'guid=' + $('[name="guid"]').val() + '&field=' + $(current_photo_items).attr('field-name'),
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $(current_photo_items).append('<div class="photo_item" data-image-id="' + value.image_id + '"><a href="#" class="delete_img">x</a><img class="ui-state-default" src="@Url.Content("~/content/cms/files/")' + value.image_id + value.image_extension + '?width=140&height=140&mode=auto" alt="" /><br/><input type="text" class="text_type" name="image_desc" value="' + value.image_desc.replace(/"/g, '&quot;') + '" data-image-id="' + value.image_id + '"  /><input type="hidden" data-image-id="' + value.image_id + '" name="image_ids_for_desc" value="' + value.image_id + '" /></div>');
+                    });
+                }
+            });
+        });
+
+        $('.file_items').each(function (index) {
+
+            var current_file_items = $(this);
+
+            $.ajax({
+                url: '@Url.Action("Load", "File")',
+                type: 'POST',
+                data: 'guid=' + $('[name="guid"]').val() + '&field=' + $(current_file_items).attr('field-name'),
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $(current_file_items).append('<div class="file_item" data-file-id="' + value.file_id + '"><span class="ui-icon ui-icon-grip-dotted-vertical">&nbsp;</span><input type="text" style="width:500px;" class="text_type" name="file_desc" value="' + value.file_desc.replace(/"/g, '&quot;') + '" data-file-id="' + value.file_id + '"  />&nbsp;<a href="#" class="delete_file">удалить</a><input type="hidden" data-file-id="' + value.file_id + '" name="file_ids_for_desc" value="' + value.file_id + '" /></div>');
+                    });
+                }
+            });
+        });
+
+        $('a.delete_img').live('click', function () {
+            var image_id = $(this).parent().attr('data-image-id');
+
+            $('[data-image-id="' + image_id + '"]').remove();
+
+            $.ajax({
+                url: '@Url.Action("Remove", "Image")',
+                type: 'POST',
+                data: 'id=' + image_id
+            });
+
+            return false;
+        });
+
+        $('a.delete_file').live('click', function () {
+            var file_id = $(this).parent().attr('data-file-id');
+
+            $('[data-file-id="' + file_id + '"]').remove();
+
+            $.ajax({
+                url: '@Url.Action("Remove", "File")',
+                type: 'POST',
+                data: 'id=' + file_id
+            });
+
+            return false;
+        });
+
+        $('.date-time').datetimepicker({
+            lang:'ru',
+            format:'Y-m-d H:i'
+        });
+
+        $('.date').datetimepicker({
+            lang:'ru',
+            format:'Y-m-d',
+            timepicker:false
+        });
+
+        $('input[name="content_main"]').click(function () {
+            if ($(this).is(':checked')) {
+                $('input[name="content_url"]').val('/');
+            } else {
+                $('input[name="content_url"]').val($('input[name="hidden_content_url"]').val());
+            }
+        });
+
+        $('input[name="content_allow_redirect"]').is(':checked') ? $('.redirect_settings').show() : $('.redirect_settings').hide();
+
+        $('input[name="content_allow_redirect"]').click(function () {
+            if ($(this).is(':checked')) {
+                $('.redirect_settings').show();
+            } else {
+                $('.redirect_settings').hide();
+            }
+        });
+
+        $('input[name="content_export_rss"]').is(':checked') ? $('.export_rss_settings').show() : $('.export_rss_settings').hide();
+
+        $('input[name="content_export_rss"]').click(function () {
+            if ($(this).is(':checked')) {
+                $('.export_rss_settings').show();
+            } else {
+                $('.export_rss_settings').hide();
+            }
+        });
+
+        $('select[name="content_template"]').change(function () {
+            location.href = '@Html.Raw(Url.Action("Edit", "Content", new { content_id = ViewBag.content_id, block_id = ViewBag.block_id, content_root = ViewBag.content_root }))' + '&content_template=' + $('select[name="content_template"]').val();
+        });
+
+        $('select.ajaxSelect').change(function(event) {
+            var attrName = $(this).attr('name');
+            var attrId = $(this).find('option:selected').val();
+            var templateName =  $("select[data-rel-field="+attrName+"]").attr('data-template-name');
+            var selectNext = $(this).attr('data-rel-field');
+
+                $.get('/cms/contents/get-rel-items?content_id='+attrId+'&template_name='+templateName).done(function (data) {
+                    $('option:not(:first-child)', $("select[data-rel-field="+attrName+"]")).remove();
+                    $('option:not(:first-child)', $("select[data-rel-field="+templateName+"]")).remove();
+                    $('select[data-rel-field="+attrName+"] option:first-child, select[data-rel-field="+templateName+"] option:first-child').attr("selected", "selected");
+                    $.each(data, function(index, element) {
+                        $("select[data-rel-field="+attrName+"]").append('<option value="' + element.content_id + '">' + element.content_name + '</option>');
+                    });
+                });
+
+        });
+        @if (ViewBag.item == null)
+        {
+        <text>
+
+        function Translite(ths){
+
+            $('input[name="content_title"], input[name="content_h1"], input[name="content_link"]').val($(ths).val());
+            $('input[name="content_url"]').val(translite($(ths).val()));
+        }
+
+        $('body').
+        on('input','input[name="content_name"]',function () {
+            Translite(this);
+        });
+
+        </text>
+        }
+    });
+</script>
+
+<form action="@Url.Action("Edit", "Content")" method="post">
+    <input type="hidden" name="content_id" value="@(ViewBag.item == null ? null : ViewBag.item.content_id)" />
+    <input type="hidden" name="guid" value="@(ViewBag.item == null ? Guid.NewGuid().ToString() : ViewBag.item.content_id)" />
+    <input type="hidden" name="content_block" value="@ViewBag.block_id" />
+    <input type="hidden" name="content_root" value="@ViewBag.content_root" />
+    <input type="hidden" name="template_fields" value="@ViewBag.current_template.template_fields" />
+    <input type="hidden" name="hidden_content_url" value="@(ViewBag.item == null ? null : ViewBag.item.content_url)" />
+    <fieldset class="collapsible">
+        <legend>Основное</legend>
+        <div>
+            <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="first"><b>Наименование:</b></td>
+                    <td>
+                        <input type="text" name="content_name" value="@(ViewBag.item == null ? null : ViewBag.item.content_name)" class="text_type required" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first">Псевдостатический адрес:</td>
+                    <td>
+                        <input type="text" name="content_url" value="@(ViewBag.item == null ? null : (bool)ViewBag.item.content_main ? "/" : ViewBag.item.content_url)" @if (ViewBag.item != null) { <text> readonly="readonly" </text> } class="text_type" />
+                    </td>
+                </tr>
+                @if (ViewBag.templates != null)
+                {
+                    <tr>
+                        <td class="first">Шаблон данных:</td>
+                        <td>
+                            <select name="content_template">
+                                @foreach (var template in ViewBag.templates)
+                                {
+                                    <option value="@template.template_id" @if (ViewBag.current_template != null && template.template_id == ViewBag.current_template.template_id) { <text> selected="selected" </text> }>
+                                        @template.template_friendly_name
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                }
+                @if (ViewBag.content_views != null && ViewBag.content_views.Count > 0)
+                {
+                    <tr @if (ViewBag.content_views.Count == 1) { <text> style="display:none;" </text> }>
+                        <td class="first">Представление:</td>
+                        <td>
+                            <select name="content_view">
+                                @foreach (var view in ViewBag.content_views)
+                                {
+                                    <option value="@view.view_id" @if (ViewBag.item != null && view.view_id == ViewBag.item.content_view) { <text> selected="selected" </text> }>
+                                        @view.view_friendly_name
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </fieldset>
+    @if (fields.ContainsKey("Настройки"))
+    {
+        <fieldset class="collapsible collapsed">
+            <legend>Настройки</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    @if (fields["Настройки"].ContainsKey("content_main") && ViewBag.content_views != null && ViewBag.content_views.Count > 0)
+                    {
+                        <tr>
+                            <td class="first">Сделать главной:</td>
+                            <td>
+                                @Html.CheckBox("content_main", ViewBag.item == null ? false : (bool)ViewBag.item.content_main)
+                            </td>
+                        </tr>
+                    }
+                    @if (fields["Настройки"].ContainsKey("content_active"))
+                    {
+                        <tr>
+                            <td class="first">Активна:</td>
+                            <td>
+                                @Html.CheckBox("content_active", ViewBag.item == null ? true : (bool)ViewBag.item.content_active)
+                            </td>
+                        </tr>
+                    }
+                    @if (fields["Настройки"].ContainsKey("content_allow_deleted"))
+                    {
+                        <tr>
+                            <td class="first">Разрешить удаление:</td>
+                            <td>
+                                @Html.CheckBox("content_allow_deleted", ViewBag.item == null ? true : (bool)ViewBag.item.content_allow_deleted)
+                            </td>
+                        </tr>
+                    }
+                    @if (fields["Настройки"].ContainsKey("content_icon"))
+                    {
+                        <tr>
+                            <td class="first">Первая картинка иконка:</td>
+                            <td>
+                                @Html.CheckBox("content_icon", ViewBag.item == null ? false : (bool)ViewBag.item.content_icon)
+                            </td>
+                        </tr>
+                    }
+                    @if (fields["Настройки"].ContainsKey("_content_allow_redirect"))
+                    {
+                        <tr>
+                            <td class="first">Переадресация:</td>
+                            <td>
+                                @Html.CheckBox("content_allow_redirect", ViewBag.item == null ? false : (bool)ViewBag.item.content_allow_redirect)
+                            </td>
+                        </tr>
+                        <tr class="redirect_settings">
+                            <td class="first">Permanent (301):</td>
+                            <td>
+                                @Html.CheckBox("content_redirect_permanent", ViewBag.item == null ? false : (bool)ViewBag.item.content_redirect_permanent)
+                            </td>
+                        </tr>
+                        <tr class="redirect_settings">
+                            <td class="first">Адрес переадресации:</td>
+                            <td><input type="text" name="content_redirect_url" value="@(ViewBag.item == null ? null : ViewBag.item.content_redirect_url)" class="text_type" /></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </fieldset>
+    }
+    @if (fields.ContainsKey("SEO"))
+    {
+        <fieldset class="collapsible collapsed">
+            <legend>SEO</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    @if (fields["SEO"].ContainsKey("content_title"))
+                    {
+                        <tr>
+                            <td class="first">Title:</td>
+                            <td><input type="text" name="content_title" value="@(ViewBag.item == null ? null : ViewBag.item.content_title)" class="text_type" /></td>
+                        </tr>
+                    }
+                    @if (fields["SEO"].ContainsKey("content_keywords"))
+                    {
+                        <tr>
+                            <td class="first">Keywords:</td>
+                            <td><input type="text" name="content_keywords" value="@(ViewBag.item == null ? null : ViewBag.item.content_keywords)" class="text_type" /></td>
+                        </tr>
+                    }
+                    @if (fields["SEO"].ContainsKey("content_description"))
+                    {
+                        <tr>
+                            <td class="first">Description:</td>
+                            <td><input type="text" name="content_description" value="@(ViewBag.item == null ? null : ViewBag.item.content_description)" class="text_type" /></td>
+                        </tr>
+                    }
+                    @if (fields["SEO"].ContainsKey("content_in_sitemap"))
+                    {
+                        <tr>
+                            <td class="first">Добавить в sitemap.xml:</td>
+                            <td>@Html.CheckBox("content_in_sitemap", ViewBag.item == null ? true : (bool)ViewBag.item.content_in_sitemap)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </fieldset>
+    }
+    @if (fields.ContainsKey("RSS"))
+    {
+        <fieldset class="collapsible">
+            <legend>RSS</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    @if (fields["RSS"].ContainsKey("content_export_rss"))
+                    {
+                        <tr>
+                            <td class="first">Экспорт RSS:</td>
+                            <td>
+                                @Html.CheckBox("content_export_rss", ViewBag.item == null ? false : (bool)ViewBag.item.content_export_rss)
+                            </td>
+                        </tr>
+                        <tr class="export_rss_settings">
+                            <td class="first">ID(s) ленты:</td>
+                            <td><input type="text" name="content_export_rss_ids" value="@(ViewBag.item == null ? null : ViewBag.item.content_export_rss_ids)" class="text_type" /></td>
+                        </tr>
+                        <tr class="export_rss_settings">
+                            <td class="first">Заголовок:</td>
+                            <td><input type="text" name="content_export_rss_title" value="@(ViewBag.item == null ? null : ViewBag.item.content_export_rss_title)" class="text_type" /></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </fieldset>
+    }
+    @if (fields.ContainsKey("Контент") || fields.ContainsKey("Пользовательские"))
+    {
+        <fieldset class="collapsible">
+            <legend>Контент</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    @if (fields.ContainsKey("Контент"))
+                    {
+                        if (fields["Контент"].ContainsKey("content_link"))
+                        {
+                            <tr>
+                                <td class="first">Текст ссылки:</td>
+                                <td><input type="text" name="content_link" value="@(ViewBag.item == null ? null : ViewBag.item.content_link)" class="text_type" /></td>
+                            </tr>
+                        }
+                        if (fields["Контент"].ContainsKey("content_h1"))
+                        {
+                            <tr>
+                                <td class="first">H1:</td>
+                                <td><input type="text" name="content_h1" value="@(ViewBag.item == null ? null : ViewBag.item.content_h1)" class="text_type" /></td>
+                            </tr>
+                        }
+                        if (fields["Контент"].ContainsKey("content_h2"))
+                        {
+                            <tr>
+                                <td class="first">H2:</td>
+                                <td><input type="text" name="content_h2" value="@(ViewBag.item == null ? null : ViewBag.item.content_h2)" class="text_type" /></td>
+                            </tr>
+                        }
+                        if (fields["Контент"].ContainsKey("content_short_text"))
+                        {
+                            <tr>
+                                <td class="first">Кратко:</td>
+                                <td>
+                                    <textarea rows="5" cols="5" class="redactor" data-upload-image-url="@Url.Action("Upload", "Image")" name="content_short_text" style="width: 100%; height: 200px;">@(ViewBag.item == null ? null : Html.Raw(ViewBag.item.content_short_text))</textarea>
+                                </td>
+                            </tr>
+                        }
+                        if (fields["Контент"].ContainsKey("content_text"))
+                        {
+                            <tr>
+                                <td class="first">Текст:</td>
+                                <td>
+                                    <textarea rows="5" cols="5" class="redactor" data-upload-image-url="@Url.Action("Upload", "Image")" name="content_text" style="width: 100%; height: 320px;">@(ViewBag.item == null ? null : Html.Raw(ViewBag.item.content_text))</textarea>
+                                </td>
+                            </tr>
+                        }
+                        if (fields["Контент"].ContainsKey("content_publish"))
+                        {
+                            <tr>
+                                <td class="first">Дата публикации:</td>
+                                <td><input type="text" name="content_publish" value="@(ViewBag.item == null || ViewBag.item.content_publish == null ? null : ViewBag.item.content_publish.ToString("yyyy-MM-dd HH:mm"))" class="text_type required date-time" /></td>
+                            </tr>
+                        }
+                    }
+                    @if (fields.ContainsKey("Пользовательские"))
+                    {
+                        foreach (var item in fields["Пользовательские"].Values.ToList())
+                        {
+                            var filter_ids = IcbcodeCMS.Areas.CMS.Models.Objects.IcbcodeUtility.StringToArray<long>((string)rootContent?.UserDefined.filjtri, new long[0]);
+
+                            if (item.field_is_filter && filter_ids.Contains((long)(item.filed_content_root ?? 0)) == false)
+                            {
+                                continue;
+                            }
+
+                            var value = ViewBag.item == null ? null : ((IDictionary<string, object>)ViewBag.item)[item.field_name];
+
+                            <tr>
+                                <td class="first">@item.field_friendly_name:</td>
+                                <td>
+                                    @switch ((string)item.field_type)
+                                    {
+                                        case "string":
+                                        case "decimal":
+                                        case "integer":
+                                            <input type="text" name="@item.field_name" value="@(ViewBag.item == null ? null : value)" class="text_type" />
+                                            break;
+
+                                        case "html":
+                                            <textarea rows="5" cols="5" class="redactor" data-upload-image-url="@Url.Action("Upload", "Image")" name="@item.field_name" style="width: 100%; height: 200px;">@(ViewBag.item == null ? null : Html.Raw(value))</textarea>
+                                            break;
+                                        case "boolean":
+                                            @Html.CheckBox((string)item.field_name, ViewBag.item == null || value == null ? false : (bool)value);
+                                            break;
+                                        case "date":
+                                            <input type="text" name="@item.field_name" value="@(ViewBag.item == null || value == null ? null : value.ToString("yyyy-MM-dd"))" class="text_type date" />
+                                            break;
+                                        case "datetime":
+                                            <input type="text" name="@item.field_name" value="@(ViewBag.item == null || value == null ? null : value.ToString("yyyy-MM-dd HH:mm"))" class="text_type date-time" />
+                                            break;
+
+                                        case "list":
+                                            List<dynamic> names = new List<dynamic>();
+                                            using (ContentRepository content_repository = new ContentRepository())
+                                            {
+                                                long totals;
+                                                if (string.IsNullOrWhiteSpace(item.field_rel_field))
+                                                {
+                                                    names = content_repository.GetActive((string[])null, item.filed_content_root == null ? (long[])null : new long[] { item.filed_content_root }, IcbcodeCMS.Areas.CMS.Utilities.ModelUtility.GetStringArray(item.filed_template_name), null, 1, Int64.MaxValue, out totals, null, null, item.field_inside_domain ? ViewBag.domain_id : null);
+                                                }
+                                                else
+                                                {
+                                                    long? root_id = items[item.field_rel_field];
+
+                                                    if (root_id.HasValue)
+                                                    {
+                                                        names = content_repository.GetActive((string[])null, new long[] { root_id.Value }, IcbcodeCMS.Areas.CMS.Utilities.ModelUtility.GetStringArray(item.filed_template_name), null, 1, Int64.MaxValue, out totals, null, null, item.field_inside_domain ? ViewBag.domain_id : null);
+                                                    }
+                                                }
+                                            }
+
+                                            <select class="ajaxSelect" data-rel-field="@item.field_rel_field" data-template-name="@item.filed_template_name" name="@item.field_name">
+                                                <option value="@((long?)null)">Выберите значение</option>
+                                                @foreach (var name in names)
+                                                {
+                                                    <option @if (ViewBag.item != null && name.content_id == value) { <text> selected="selected" </text> } value="@name.content_id">
+                                                        @name.content_name
+                                                    </option>
+                                                }
+                                            </select>
+                                            break;
+
+                                        case "multiplelist":
+                                            using (ContentRepository content_repository = new ContentRepository())
+                                            {
+                                                long totals;
+
+                                                names = content_repository.GetActive((string[])null, item.filed_content_root == null ? (long[])null : new long[] { item.filed_content_root }, IcbcodeCMS.Areas.CMS.Utilities.ModelUtility.GetStringArray(item.filed_template_name), (item.field_name == "kross_tovari" ? "content_name" : null), 1, Int64.MaxValue, out totals, null, null, item.field_inside_domain ? ViewBag.domain_id : null);
+                                            }
+                                            <select class="ajaxSelect" data-rel-field="@item.field_rel_field" data-template-name="@item.filed_template_name" name="@item.field_name" multiple="multiple" style="height:150px;">
+                                                @foreach (var name in names)
+                                                {
+                                                    <option value="@name.content_id" @if (ViewBag.item != null && ((string)value ?? string.Empty).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Contains((string)name.content_id.ToString())) { <text> selected="selected" </text> } value="@name.content_id">@(item.field_name == "kross_tovari" ? $"{name.artikul} - {name.content_name}" : name.content_name)</option>
+                                                }
+                                            </select>
+                                            break;
+
+                                        case "tags":
+
+                                            using (TagRepository tag_repository = new TagRepository())
+                                            {
+                                                names = tag_repository.Get(item.field_name, (item.field_inside_domain ? ViewBag.domain_id : null));
+                                            }
+
+                                            <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $("#@item.field_name").tagit({
+                                            fieldName: "@item.field_name",
+                                            autocomplete: { delay: 0, minLength: 2 },
+                                            removeConfirmation: true,
+                                            caseSensitive: false,
+                                            allowSpaces: true,
+                                            tagLimit: @(string.IsNullOrWhiteSpace(item.filed_tags_limit) ? "0" : item.filed_tags_limit),
+                                            availableTags: @Html.Raw(Json.Encode(names.Select(x => x.tag_name)))
+                                        });
+                                    });
+                                            </script>
+
+                                            <ul id="@item.field_name">
+                                                @foreach (var name in (ViewBag.item == null ? new string[0] : ((string)value ?? string.Empty).Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)))
+                                                {
+                                                    <li>@name</li>
+                                                }
+                                            </ul>
+
+                                            break;
+
+                                        case "image":
+                                            <input class="imageupload" field-name="@item.field_name" type="file" name="files[]" multiple="multiple" data-url="@string.Format("{0}?guid={1}&field={2}", Url.Action("Upload", "Image"), (ViewBag.item == null ? Guid.NewGuid().ToString() : ViewBag.item.content_id), item.field_name)" />
+                                            <div class="image-progress" field-name="@item.field_name">
+                                                <div class="bar" style="width: 0%; height: 5px; background: #ccc;"></div>
+                                            </div>
+                                            break;
+
+                                        case "file":
+                                            <input class="fileupload" field-name="@item.field_name" type="file" name="files[]" multiple="multiple" data-url="@string.Format("{0}?guid={1}&field={2}", Url.Action("Upload", "File"), (ViewBag.item == null ? Guid.NewGuid().ToString() : ViewBag.item.content_id), item.field_name)" />
+                                            <div class="file-progress" field-name="@item.field_name">
+                                                <div class="bar" style="width: 0%; height: 5px; background: #ccc;"></div>
+                                            </div>
+                                            break;
+                                    }
+                                </td>
+                            </tr>
+                            if (item.field_type == "image")
+                            {
+                                <tr>
+                                    <td colspan="2" class="image-sortable photo_items" field-name="@item.field_name" data-update-url="@Url.Action("UpdateOrder", "Image")">
+                                    </td>
+                                </tr>
+                            }
+
+                            if (item.field_type == "file")
+                            {
+                                <tr>
+                                    <td colspan="2" class="file-sortable file_items" field-name="@item.field_name" data-update-url="@Url.Action("UpdateOrder", "File")">
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </table>
+            </div>
+        </fieldset>
+    }
+    @if (fields.ContainsKey("Файлы"))
+    {
+        <fieldset class="collapsible">
+            <legend>Файлы</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="first">Файлы:</td>
+                        <td>
+                            <input class="fileupload" field-name="" type="file" name="files[]" multiple="multiple" data-url="@string.Format("{0}?guid={1}&field={2}", Url.Action("Upload", "File"), (ViewBag.item == null ? Guid.NewGuid().ToString() : ViewBag.item.content_id), string.Empty)" />
+                            <div class="file-progress" field-name="">
+                                <div class="bar" style="width: 0%; height: 5px; background: #ccc;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="file-sortable file_items" field-name="" data-update-url="@Url.Action("UpdateOrder", "File")">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    }
+    @if (fields.ContainsKey("Картинки"))
+    {
+        <fieldset class="collapsible">
+            <legend>Картинки</legend>
+            <div>
+                <table class="edit_table" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="first">Картинки:</td>
+                        <td>
+                            <input class="imageupload" field-name="" type="file" name="files[]" multiple="multiple" data-url="@string.Format("{0}?guid={1}&field={2}", Url.Action("Upload", "Image"), (ViewBag.item == null ? Guid.NewGuid().ToString() : ViewBag.item.content_id), string.Empty)" />
+                            <div class="image-progress" field-name="">
+                                <div class="bar" style="width: 0%; height: 5px; background: #ccc;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="image-sortable photo_items" field-name="" data-update-url="@Url.Action("UpdateOrder", "Image")">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    }
+    <div id="nav_panel">
+        <button type="submit" class="button_element" onclick="return isValidForm();">Сохранить</button>
+        <button type="button" class="button_element" onclick="location.href='@Url.Action("Index", new { block_id = ViewBag.block_id, content_root = ViewBag.content_root })'">Отмена</button>
+    </div>
+    <br />
+</form>

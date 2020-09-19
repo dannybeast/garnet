@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Авторизация";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutBase.cshtml";
+}
+
+<form action="@Url.Action("SignIn", "Account")" method="post">
+    <div id="auth_block" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all">Авторизация</div>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" class="auth_table">
+            <tr>
+                <td class="label">Имя:</td>
+                <td><input type="text" class="text_type" name="login" /></td>
+            </tr>
+            <tr>
+                <td class="label">Пароль:</td>
+                <td><input type="password" class="text_type" name="password" /></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><button class="button_element">Войти</button></td>
+            </tr>
+        </table>
+    </div>
+</form>

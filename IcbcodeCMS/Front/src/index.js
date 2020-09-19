@@ -1,10 +1,10 @@
 // SVG
 var __svg__ = {
   path: "./assets/icons/**/*.svg",
-  name: "assets/icons/sprite.svg",
+  name: "/Front/dist/assets/icons/sprite.svg",
 };
 __svg__ = {
-  filename: "/assets/icons/sprite.svg",
+  filename: "/Front/dist/assets/icons/sprite.svg",
 };
 require("webpack-svgstore-plugin/src/helpers/svgxhr")(__svg__);
 
@@ -27,7 +27,7 @@ import contactsMap from "./js/modules/contactsMap";
 // import "./js/forms/request";
 // import "./js/forms/price";
 
-$(document).ready(function() {
+$(document).ready(function () {
   animations();
   lazyload();
   sliders();
@@ -42,7 +42,7 @@ $(document).ready(function() {
     }
   });
 
-  $(".advantage-item").hover(function() {
+  $(".advantage-item").hover(function () {
     $(".advantage-item").removeClass("active");
     $(this).addClass("active");
   });

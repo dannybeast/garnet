@@ -1,7 +1,7 @@
 // SVG
 var __svg__ = {
   path: "./assets/icons/**/*.svg",
-  name: "/Front/dist/assets/icons/sprite.svg",
+  name: "assets/icons/sprite.svg",
 };
 __svg__ = {
   filename: "/Front/dist/assets/icons/sprite.svg",

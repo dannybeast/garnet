@@ -27,7 +27,7 @@ import "./js/forms/validation";
 import "./js/forms/request";
 import "./js/forms/price";
 
-$(document).ready(function () {
+$(document).ready(function() {
   animations();
   lazyload();
   sliders();
@@ -42,13 +42,17 @@ $(document).ready(function () {
     }
   });
 
-  $(".advantage-item").hover(function () {
+  $(".advantage-item").hover(function() {
     $(".advantage-item").removeClass("active");
     $(this).addClass("active");
   });
 
-  scrollTo(".js-scrollTo-price", ".get-price", "0");
-  scrollTo(".js-scrollTo-products", ".products", "0");
+  if ($(".js-scrollTo-price").length) {
+    scrollTo(".js-scrollTo-price", ".get-price", "0");
+  }
+  if ($(".js-scrollTo-products").length) {
+    scrollTo(".js-scrollTo-products", ".products", "0");
+  }
   mobileNavigation();
   new Modal();
   masks();

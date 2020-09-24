@@ -233,28 +233,7 @@ block content
                                 +e.desc
                                     p Готовим продукцию к отгрузке в удобное для Вас время.
 
-            +b.SECTION.get-price(data-emergence="hidden")
-                .container
-                    +e.block
-                        +e.block-top
-                            .typography
-                                p Пожалуйста, оставьте свои данные, наш специалист вышлет актуальный прайс в ближайшее время
-                            +e.intro-text
-                                +b.P.subtitle.color-primary Наши цены
-                                +b.H3.title Получить прайс
-                                +e.icon
-                                    +icon('profit')
-                        +e.FORM.form(class=" js-price-form")
-                            +b.field
-                                label Имя
-                                input(type="text" name="name")
-                            +b.field
-                                label E-mail
-                                input(type="text" name="email")
-                            +b.field
-                                label Телефон
-                                input(type="text" name="phone" placeholder="+7 (___) ___-__-__").js-phone-mask
-                            +b.BUTTON.btn(class="--primary") Получить прайс
+            include ../includes/modules/_get-price
         include ../includes/modules/footer
 
 block script

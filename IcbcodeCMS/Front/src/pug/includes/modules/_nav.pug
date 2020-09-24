@@ -2,10 +2,11 @@
     +e.LI
         a(href="about.html") О компании
     +e.LI
-        a().js-scrollTo-products Продукция
+        a() Продукция
     +e.LI
         a(href="news.html") Новости
     +e.LI
         a(href="documents.html") Документы
-    +e.LI
-        +b.A(class="btn --primary-gradient js-modal" data-modal="request") Оставить заявку
+    if pageName === "index"
+        +e.LI
+            +b.A(class="btn --primary-gradient js-modal" data-modal="request") Оставить заявку

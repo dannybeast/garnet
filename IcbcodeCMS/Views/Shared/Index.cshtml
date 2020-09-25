@@ -15,7 +15,9 @@
             @Model.H1
         </h1>
         <div class="intro__buttons">
-            <a class="intro-button" href="~/o-kompanii"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-details.png" alt=""></span><span>Подробнее о нас</span></a><a class="intro-button js-scrollTo-price"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-price.png" alt=""></span><span>Получить прайс-лист</span></a><a class="intro-button js-scrollTo-products"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-buy.png" alt=""></span><span>Оптовая продажа яблок</span></a>
+            <a class="intro-button" href="~/o-kompanii"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-details.png" alt=""></span><span>Подробнее о нас</span></a>
+            <a href="#" class="intro-button"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-price.png" alt=""></span><span>Получить прайс-лист</span></a>
+            <a href="#products" class="intro-button"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-buy.png" alt=""></span><span>Оптовая продажа яблок</span></a>
         </div>
     </div><img class="intro__img" src="~/Front/dist/assets/images/intro.jpg" alt="" role="presentation" />
 </section>
@@ -32,9 +34,7 @@
                             <div class="advantage-item">
                                 <div class="advantage-item__content">
                                     <div class="advantage-item__icon">
-                                        <svg class="svg-icon">
-                                            <use href="@(image?.Url)"></use>
-                                        </svg>
+                                        <img src="@(image?.Url)" />
                                     </div>
                                     <p class="advantage-item__title">
                                         @Html.Raw(item.Name)
@@ -108,7 +108,7 @@
         <div class="slider-dots"></div>
     </div>
 </section>
-<section class="products" data-emergence="hidden">
+<section id="products" class="products" data-emergence="hidden">
     <div class="container">
         <div class="products__row">
             @foreach (var item in products)

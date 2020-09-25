@@ -1179,6 +1179,7 @@ section,
   .title {
     text-align: right;
     max-width: 270px;
+    font-size: 49px;
     margin-bottom: 0px;
     @include sm-block() {
       text-align: center;

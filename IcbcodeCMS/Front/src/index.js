@@ -19,7 +19,6 @@ import Modal from "./js/modules/modals";
 import animations from "./js/modules/animations";
 import masks from "./js/modules/inputmasks";
 import sliders from "./js/modules/sliders";
-import { scrollTo } from "./js/modules/scrollTo";
 import contactsMap from "./js/modules/contactsMap";
 
 // Forms
@@ -47,12 +46,6 @@ $(document).ready(function() {
     $(this).addClass("active");
   });
 
-  if ($(".js-scrollTo-price").length) {
-    scrollTo(".js-scrollTo-price", ".get-price", "0");
-  }
-  if ($(".js-scrollTo-products").length) {
-    scrollTo(".js-scrollTo-products", ".products", "0");
-  }
   mobileNavigation();
   new Modal();
   masks();

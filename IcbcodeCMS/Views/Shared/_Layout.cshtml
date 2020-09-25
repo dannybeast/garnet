@@ -32,7 +32,7 @@
                                     @foreach (var item in menus)
                                     {
                                         <li>
-                                            <a class="@(item.Url == "/produkciya" ? "js-scrollTo-products" : null)" href="@(item.Url == "/produkciya" ? "#" : item.Url)">@item.Link</a>
+                                            <a class="@(item.Url == "/produkciya" ? "js-scrollTo-products" : null)" href="@(item.Url == "/produkciya" ? "/#products" : item.Url)">@item.Link</a>
                                         </li>
                                     }
                                     <li>

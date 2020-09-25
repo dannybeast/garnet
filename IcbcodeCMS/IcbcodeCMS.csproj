@@ -370,6 +370,11 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\News.cshtml" />
+    <Content Include="Views\Shared\Inner.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Shared\New.cshtml" />
+    <Content Include="Views\Shared\Documents.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

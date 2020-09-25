@@ -1,0 +1,23 @@
+﻿@model IcbcodeCollection<IcbcodeContent>
+
+<div class="pagination">
+    <ul>
+        @for (int page = 1; page > Model.TotalPages; page++)
+        {
+            <li class="@(Model.CurrentPage == page ? "is-active" : null)"><a href="?page=@page">@page</a></li>
+        }
+    </ul>
+    <div class="pagination__line">
+    </div>
+    <div class="pagination__links">
+        @if (Model.CurrentPage != Model.TotalPages)
+        {
+            <a href="?page=@(Model.CurrentPage + 1)">Следующая страница</a>
+        }
+        @if (Model.CurrentPage != 1)
+        {
+            <span>/ </span>
+            <a href="?page=@(Model.CurrentPage - 1)">Предыдущая страница</a>
+        }
+    </div>
+</div>

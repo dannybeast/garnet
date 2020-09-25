@@ -1,0 +1,86 @@
+﻿@model IcbcodeContent
+@{
+    var image = Model.GetImage();
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page__content">
+    <section class="news-details">
+        <div class="container">
+            <div class="news-intro">
+                <div class="news-intro__top">
+                    <div class="news-intro__col">
+                        <p class="news-intro__subtitle">
+                            Новости
+                        </p>
+                        <h2 class="news-intro__title">
+                            @Model.Link
+                        </h2>
+                    </div>
+                    @if (Model.Publish.HasValue)
+                    {
+                        <p class="news-intro__date">
+                            @Model.Publish.Value.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                </div>
+                <div class="news-intro__media">
+                    <img src="assets/images/news-details.jpg" alt="">
+                    <div class="news-intro__eye">
+                        <svg class="svg-icon">
+                            <use href="assets/icons/sprite.svg#icon-eye"></use>
+                        </svg><span></span>
+                    </div>
+                    <div class="news-intro__intro-text">
+                        @Html.Raw(Model.ShortText)
+                    </div>
+                </div>
+            </div>
+            <div class="typography">
+                @Html.Raw(Model.Text)
+            </div>
+        </div>
+    </section>
+    <section class="get-price" data-emergence="hidden">
+        <div class="container">
+            <div class="get-price__block">
+                <div class="get-price__block-top">
+                    <div class="typography">
+                        <p>Пожалуйста, оставьте свои данные, наш специалист вышлет актуальную информацию о наличии продукции в ближайшее время.</p>
+                    </div>
+                    <div class="get-price__intro-text">
+                        <p class="subtitle color-primary">
+                            Наши цены
+                        </p>
+                        <h3 class="title">
+                            Узнать о наличии продукции
+                        </h3>
+                        <div class="get-price__icon">
+                            <svg class="svg-icon">
+                                <use href="~/Front/dist/assets/icons/sprite.svg#icon-profit"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <form class="get-price__form js-price-form">
+                    <div class="field">
+                        <label>Имя</label>
+                        <input type="text" name="name">
+                    </div>
+                    <div class="field">
+                        <label>E-mail</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div class="field">
+                        <label>Телефон</label>
+                        <input class="js-phone-mask" type="text" name="phone" placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <button class="btn btn--primary">
+                        Отправить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

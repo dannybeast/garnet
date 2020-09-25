@@ -6,7 +6,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Vyacheslav Tyurikov\Desktop\SVN\IcbcodeCMS\IcbcodeCMS\bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\Vyacheslav Tyurikov\Desktop\garnet.icbcode.ru\garnet\IcbcodeCMS\bin\Release\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -22,13 +22,13 @@
       <publishTime>10/30/2018 19:32:42</publishTime>
     </File>
     <File Include="Areas/CMS/Views/Content/Edit.cshtml">
-      <publishTime>10/30/2018 19:39:15</publishTime>
+      <publishTime>05/21/2020 17:43:09</publishTime>
     </File>
     <File Include="Areas/CMS/Views/Content/Import.cshtml">
-      <publishTime>10/30/2018 19:32:42</publishTime>
+      <publishTime>06/07/2020 10:47:28</publishTime>
     </File>
     <File Include="Areas/CMS/Views/Content/Index.cshtml">
-      <publishTime>10/30/2018 19:32:42</publishTime>
+      <publishTime>06/07/2020 11:00:27</publishTime>
     </File>
     <File Include="Areas/CMS/Views/Domain/Edit.cshtml">
       <publishTime>10/30/2018 19:32:42</publishTime>
@@ -93,20 +93,35 @@
     <File Include="bin/ApplicationInsights.config">
       <publishTime>10/30/2018 18:07:07</publishTime>
     </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>02/21/2020 16:24:54</publishTime>
+    </File>
     <File Include="bin/Dapper.dll">
-      <publishTime>05/16/2018 18:40:30</publishTime>
+      <publishTime>04/05/2020 12:46:02</publishTime>
     </File>
     <File Include="bin/Google.Protobuf.dll">
-      <publishTime>12/21/2017 20:23:44</publishTime>
+      <publishTime>08/14/2020 16:35:16</publishTime>
+    </File>
+    <File Include="bin/Google.Protobuf.pdb">
+      <publishTime>08/14/2020 22:24:56</publishTime>
     </File>
     <File Include="bin/IcbcodeCMS.dll">
-      <publishTime>11/05/2018 11:55:23</publishTime>
+      <publishTime>09/19/2020 14:38:35</publishTime>
     </File>
     <File Include="bin/IcbcodeCMS.pdb">
-      <publishTime>11/05/2018 11:55:23</publishTime>
+      <publishTime>09/19/2020 14:38:35</publishTime>
     </File>
     <File Include="bin/ImageResizer.dll">
-      <publishTime>04/06/2018 17:59:28</publishTime>
+      <publishTime>07/31/2020 20:34:16</publishTime>
+    </File>
+    <File Include="bin/K4os.Compression.LZ4.dll">
+      <publishTime>09/12/2020 01:11:58</publishTime>
+    </File>
+    <File Include="bin/K4os.Compression.LZ4.Streams.dll">
+      <publishTime>09/12/2020 01:12:00</publishTime>
+    </File>
+    <File Include="bin/K4os.Hash.xxHash.dll">
+      <publishTime>07/03/2019 20:39:02</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>06/27/2017 12:59:34</publishTime>
@@ -130,76 +145,82 @@
       <publishTime>02/22/2018 14:36:52</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
-      <publishTime>06/28/2017 15:05:26</publishTime>
+      <publishTime>07/02/2020 21:36:22</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>07/08/2020 21:52:58</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 12:48:56</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
-      <publishTime>09/26/2018 06:42:22</publishTime>
+      <publishTime>06/02/2020 15:31:36</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>02/18/2018 09:44:54</publishTime>
+      <publishTime>11/09/2019 00:56:44</publishTime>
+    </File>
+    <File Include="bin/Renci.SshNet.dll">
+      <publishTime>10/16/2017 20:53:06</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:51:56</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:51:56</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:40:20</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:52:16</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe.config">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:52:16</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:40:40</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>05/24/2018 13:38:22</publishTime>
+      <publishTime>05/19/2020 01:47:18</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:51:40</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:51:58</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:49:16</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:49:32</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:50:04</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:40:20</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>12/05/2017 01:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>12/05/2017 01:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:40:20</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:40:20</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
       <publishTime>05/24/2018 13:38:24</publishTime>
     </File>
+    <File Include="bin/roslyn/System.Buffers.dll">
+      <publishTime>07/19/2017 17:01:28</publishTime>
+    </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/15/2018 20:29:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
       <publishTime>05/24/2018 13:38:24</publishTime>
@@ -225,8 +246,17 @@
     <File Include="bin/roslyn/System.IO.Pipes.dll">
       <publishTime>05/24/2018 13:38:24</publishTime>
     </File>
+    <File Include="bin/roslyn/System.Memory.dll">
+      <publishTime>04/17/2019 23:24:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Numerics.Vectors.dll">
+      <publishTime>07/19/2017 17:01:36</publishTime>
+    </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/15/2018 20:29:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>11/15/2019 16:37:58</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.AccessControl.dll">
       <publishTime>05/24/2018 13:38:24</publishTime>
@@ -250,7 +280,10 @@
       <publishTime>05/24/2018 13:38:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>11/29/2018 23:39:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>06/18/2019 19:08:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.ValueTuple.dll">
       <publishTime>05/24/2018 13:38:24</publishTime>
@@ -268,67 +301,85 @@
       <publishTime>05/24/2018 13:38:24</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:50:06</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:50:06</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:40:26</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:52:02</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>05/24/2018 13:38:24</publishTime>
+      <publishTime>05/19/2020 01:52:02</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Helpers.resources.dll">
-      <publishTime>02/01/2018 12:21:16</publishTime>
+      <publishTime>11/28/2018 13:04:46</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Mvc.resources.dll">
-      <publishTime>02/01/2018 12:16:52</publishTime>
+      <publishTime>11/28/2018 13:00:10</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Optimization.resources.dll">
       <publishTime>02/11/2014 15:28:42</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Razor.resources.dll">
-      <publishTime>02/01/2018 12:17:14</publishTime>
+      <publishTime>11/28/2018 13:00:32</publishTime>
     </File>
     <File Include="bin/ru/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>02/01/2018 12:21:16</publishTime>
+      <publishTime>11/28/2018 13:04:46</publishTime>
     </File>
     <File Include="bin/ru/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>02/01/2018 12:21:16</publishTime>
+      <publishTime>11/28/2018 13:04:46</publishTime>
     </File>
     <File Include="bin/ru/System.Web.WebPages.resources.dll">
-      <publishTime>02/01/2018 12:21:16</publishTime>
+      <publishTime>11/28/2018 13:04:46</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
-      <publishTime>07/19/2017 10:01:30</publishTime>
+      <publishTime>04/14/2020 22:49:20</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 13:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>02/21/2020 03:58:04</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>02/01/2018 12:16:32</publishTime>
+      <publishTime>11/28/2018 12:59:46</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>02/11/2014 16:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>02/01/2018 12:16:56</publishTime>
+      <publishTime>11/28/2018 13:00:12</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>02/01/2018 12:20:56</publishTime>
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/Ubiety.Dns.Core.dll">
+      <publishTime>06/02/2020 15:30:12</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 14:57:34</publishTime>
+    </File>
+    <File Include="bin/Zstandard.Net.dll">
+      <publishTime>06/02/2020 15:30:12</publishTime>
     </File>
     <File Include="content/cms/css/icbcode.cms.panel.css">
       <publishTime>10/30/2018 19:33:35</publishTime>
@@ -1044,6 +1095,198 @@
     <File Include="content/site/js/youtube-prew.js">
       <publishTime>11/03/2018 19:31:19</publishTime>
     </File>
+    <File Include="Front/dist/assets/css/app.css">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/css/app.css.gz">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI-Bold.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI-BoldItalic.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI-Italic.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI-Light.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI-SemiBold.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/fonts/SegoeUI/SegoeUI.woff">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/001-apple.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/001-arrow.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/001-move-to-next.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/001-package.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/001-right.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/002-settings.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/003-care.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/003-harvest.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/004-calendar.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/agriculture.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/apple.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/apples.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/apples.svg.gz">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/calendar.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/cross.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/doc.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/left-arrow.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/love.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/mail.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/phone.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/place.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/profit.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/sprite.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/icons/sprite.svg.gz">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/about-after.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/about.jpg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/apple-slider/1.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/apple-slider/1.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/footer-before.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/icons/apple-buy.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/icons/apple-details.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/icons/apple-price.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/icons/pentagon-active.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/icons/pentagon.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/intro.jpg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/logo/logo.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/pentagon-line.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/1.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/2.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/3.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/4.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/5.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/6.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/products/7.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/quotes/quote-left.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/quotes/quote-right.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/social/instagram.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/social/vk.png">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/images/spinner.svg">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/js/app.js">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/assets/js/app.js.gz">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/favicon.ico">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/index.html">
+      <publishTime>09/19/2020 13:00:15</publishTime>
+    </File>
+    <File Include="Front/dist/report.html">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/robots.txt">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
+    <File Include="Front/dist/sitemap.xml">
+      <publishTime>09/19/2020 11:27:35</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>10/30/2018 18:06:38</publishTime>
     </File>
@@ -1054,7 +1297,7 @@
       <publishTime>11/05/2018 11:44:17</publishTime>
     </File>
     <File Include="Views/Shared/Index.cshtml">
-      <publishTime>11/03/2018 20:43:26</publishTime>
+      <publishTime>09/19/2020 14:19:01</publishTime>
     </File>
     <File Include="Views/Shared/Inner.cshtml">
       <publishTime>11/03/2018 18:51:08</publishTime>
@@ -1069,7 +1312,7 @@
       <publishTime>11/03/2018 18:51:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/05/2018 11:13:02</publishTime>
+      <publishTime>09/19/2020 13:39:06</publishTime>
     </File>
     <File Include="Views/Shared/_LeftColumn.cshtml">
       <publishTime>11/03/2018 19:36:01</publishTime>
@@ -1084,7 +1327,7 @@
       <publishTime>10/30/2018 18:06:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/05/2018 11:55:24</publishTime>
+      <publishTime>09/19/2020 14:38:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -15,13 +15,14 @@
     <meta name="keywords" content="@Model.Keywords">
     <link rel="shortcut icon" href="~/Front/dist/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/Front/dist/assets/css/app.css">
+    @Html.Raw(settings["schetchik-google-analytics"])
 </head>
 <body>
     <div class="loader"><img src="~/Front/dist/assets/images/spinner.svg" alt=""></div>
     <main class="wrapper" id="app" data-emergence="hidden">
         <!-- WEBSITE-->
         <div class="content">
-            <div class="page-index">
+            <div class="@(Model.IsMain ? "page-index" : "page")">
                 <header class="header">
                     <div class="container">
                         <div class="header__row">
@@ -30,9 +31,9 @@
                                 <ul>
                                     @foreach (var item in menus)
                                     {
-                                    <li>
-                                        <a href="@item.Url">@item.Link</a>
-                                    </li>
+                                        <li>
+                                            <a class="@(item.Url == "/produkciya" ? "js-scrollTo-products" : null)" href="@(item.Url == "/produkciya" ? "#" : item.Url)">@item.Link</a>
+                                        </li>
                                     }
                                     <li>
                                         <a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
@@ -62,6 +63,31 @@
                         </div>
                     </div>
                 </header>
+                @if (Model.IsMain == false)
+                {
+                    <section class="page-intro">
+                        <div class="container">
+                            <div class="breadcrumbs">
+                                <a href="~/">Главная</a>
+                                @foreach (var item in Model.Parents)
+                                {
+                                    <span>/ </span>
+                                    if (item.ID == Model.ID)
+                                    {
+                                        <span>@item.Link</span>
+                                    }
+                                    else
+                                    {
+                                        <a href="@item.Url">@item.Link</a>
+                                    }
+                                }
+                            </div>
+                            <div class="page-intro__buttons">
+                                <a class="btn btn--green-gradient">Получить прайс лист</a><a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
+                            </div>
+                        </div>
+                    </section>
+                }
                 @RenderBody()
             </div>
             <footer class="footer">

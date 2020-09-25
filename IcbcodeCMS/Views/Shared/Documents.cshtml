@@ -1,0 +1,29 @@
+﻿@model IcbcodeContent
+@{
+    var items = Model.GetFiles();
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page__content">
+    <section class="news-list">
+        <div class="container">
+            <h3 class="title">
+                @Model.H1
+            </h3>
+            @foreach (var item in items)
+            {
+                <a class="news-item" href="news-details.html">
+                    <span class="news-item__content">
+                        <p class="news-item__title">
+                            @item.Description
+                        </p>
+                        <p class="news-item__date">
+                            @item.Publish.ToString("dd/MM/yyyy")
+                        </p>
+                    </span>
+                </a>
+            }
+        </div>
+    </section>
+</div>

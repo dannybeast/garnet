@@ -14,7 +14,7 @@
     <meta name="description" content="@Model.Description">
     <meta name="keywords" content="@Model.Keywords">
     <link rel="shortcut icon" href="~/Front/dist/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/Front/dist/assets/css/app.css">
+    <link rel="stylesheet" href="~/Front/dist/assets/css/app-04-07-2024.css">
     @Html.Raw(settings["schetchik-google-analytics"])
 </head>
 <body>
@@ -26,7 +26,10 @@
                 <header class="header">
                     <div class="container">
                         <div class="header__row">
-                            <a class="header__logo" href="~/"><img src="~/Front/dist/assets/images/logo/logo.png" alt=""></a>
+                            <a class="header__logo" href="~/">
+                            <img class="logo-dark" src="~/Front/dist/assets/images/logo/logo.png" alt="">
+                            <img class="logo-white" src="~/Front/dist/assets/images/logo/logo-white.png" alt="">
+                            </a>
                             <nav class="header__nav">
                                 <ul>
                                     @foreach (var item in menus)
@@ -36,7 +39,7 @@
                                         </li>
                                     }
                                     <li>
-                                        <a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
+                                        <a class="btn btn--primary-gradient js-modal" data-modal="request">Купить яблоки оптом</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -47,7 +50,7 @@
                                     </svg>
                                 </div>
                                 <div class="contact-item__content">
-                                    @settings["kratkij-adres"]
+                                    <a class="js-modal" data-modal="map">@settings["kratkij-adres"]</a>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -56,9 +59,11 @@
                                         <use href="~/Front/dist/assets/icons/sprite.svg#icon-phone"></use>
                                     </svg>
                                 </div>
-                                <div class="contact-item__content">
+                                <!-- <div class="contact-item__content">
                                     <a class="contact-item__phone" href="tel:@settings["telefon"]">@settings["telefon"]</a>
-                                </div>
+                                </div> -->
+                                 <div class="contact-item__content"><a class="contact-item__phone" href="tel:+78613041735">+7(86130) 4-17-35</a><a class="contact-item__phone" href="tel:+79886520985">+7(988) 652-09-85</a>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +88,8 @@
                                 }
                             </div>
                             <div class="page-intro__buttons">
-                                <a class="btn btn--green-gradient">Получить прайс лист</a><a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>
+                                <a class="btn btn--green-gradient js-modal" data-modal="request">Оставить заявку для сотрудничества</a>
+								<!--<a class="btn btn--primary-gradient js-modal" data-modal="request">Оставить заявку</a>-->
                             </div>
                         </div>
                     </section>
@@ -197,5 +203,6 @@
         </div>
     </main>
     <script src="~/Front/dist/assets/js/app.js"></script>
+	@Html.Raw(settings["schetchik-yandeks-metrika"])
 </body>
 </html>

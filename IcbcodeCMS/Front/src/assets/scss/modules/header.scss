@@ -3,27 +3,34 @@
   align-items: center;
   font-size: 13px;
   &__content {
-    max-width: 180px;
+    max-width: 220px;
+    min-width: 167px;
+   @include from($break_lg){
+    max-width: clamp(130px, 14vw, 220px);
+   }
+   text-wrap: balance;
   }
   &__phone {
     color: #000;
     text-decoration: none;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
+    display: block;
+    white-space: nowrap;
   }
   &__icon {
     flex-shrink: 0;
-    margin-right: 15px;
+    margin-right: 10px;
     svg {
-      width: 27px;
-      height: 27px;
+      width: 24px;
+      height: 24px;
       fill: $neutral-primary;
     }
   }
 }
 .header {
   .container {
-    max-width: 1400px;
+    max-width: 1590px;
   }
   .nav-button {
     display: none;
@@ -35,7 +42,21 @@
   }
   &__logo {
     display: block;
-    margin-top: -7px;
+    margin-top: -8px;
+     width: 175px;
+     flex-shrink: 0;
+     margin-right: 30px;
+
+      @include from($break_lg){
+      width: clamp(130px, 12vw, 175px);
+      margin-right: clamp(15px, 1vw, 30px);
+    }
+    img{
+     width: 100%;
+    }
+    .logo-white{
+     display: none;
+    }
   }
   &__row {
     display: flex;
@@ -43,6 +64,7 @@
     align-items: center;
     padding-top: 30px;
     padding-bottom: 30px;
+    gap: rem(15);
     @include sm-block() {
       padding-top: 15px;
       padding-bottom: 15px;
@@ -51,35 +73,34 @@
   &__nav {
     margin-left: auto;
     margin-right: auto;
-    @include to(1320px) {
-      margin-left: auto;
-      margin-right: 30px;
-    }
-    @include to(1120px) {
-      margin-right: 0;
-    }
+ 
     @include lg-block() {
       display: none;
     }
     ul {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      gap: rem(10) clamp(15px,1.6vw, 25px)
     }
-    li {
-      margin: 0 35px 0 0;
-      &:last-child {
-        margin-right: 0;
-      }
-    }
+   
     a {
       font-size: 15px;
       letter-spacing: -0.52px;
       font-weight: 600;
       color: #000;
+      white-space: nowrap;
+      text-transform: uppercase;
+           @include from($break_lg){
+      font-size: clamp(13px,1vw, 15px);
+    }
       &.btn {
         color: #fff;
-        padding-left: 20px;
-        padding-right: 20px;
+        text-align: center;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 10px; 
+        background-image: linear-gradient( -180deg, rgb(249,51,48) 0%, rgb(125,3,0) 67%);
         &:hover {
           color: #fff;
         }
@@ -90,24 +111,23 @@
     }
   }
   .contact-item {
-    margin-left: 15px;
-    &:first-of-type {
-      margin-left: auto;
-      @include to(1320px) {
+    @include from($break_lg){
+      margin-left: clamp(8px,1vw, 15px);
+    }
+   @include sm-block() {
         display: none;
       }
+    &:first-of-type {
+       @include lg-block() {
+        margin-left: auto !important;
+       }
     }
     &:last-of-type {
-      @include to(1120px) {
-        display: none;
-      }
-      @include lg-block() {
-        display: flex;
-        margin-left: auto;
-      }
-      @include sm-block() {
-        display: none;
-      }
+      // @include to(1120px) {
+      //   display: none;
+      // }
+    
+     
     }
   }
 }

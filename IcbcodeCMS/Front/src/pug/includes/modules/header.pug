@@ -2,15 +2,17 @@
   .container
     +e.row
       +e.A(href="index.html" class="logo")
-        img(src="assets/images/logo/logo.png", alt="")
+        img(src="assets/images/logo/logo.png", alt="").logo-dark
+        img(src="assets/images/logo/logo-white.png", alt="").logo-white
       +e.NAV.nav
         include ./_nav
       +b.contact-item
         +e.icon
           +icon('place')
-        +e.content Краснодарский край, х. Привольный, ул. Мира, д. 78
+        +e.content Краснодарский край, г.Курганинск, ул.Гранатовая территория 2/2
       +b.contact-item
         +e.icon
           +icon('phone')
         +e.content
-          +e.A(href="tel:+79181701095" class="phone") +7 (918) 170-10-95
+          +e.A(href="tel:+78613041735" class="phone") +7(86130) 4-17-35
+          +e.A(href="tel:+79886520985" class="phone") +7(988) 652-09-85

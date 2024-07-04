@@ -50,4 +50,9 @@ $(document).ready(function() {
   new Modal();
   masks();
   hideLoader();
+
+  $('[data-video-play]').on('click', function(){
+   $(this).toggleClass('is-active');
+   $('[data-video]')[0].paused ? $('[data-video]')[0].play() : $('[data-video]')[0].pause();
+  })
 });

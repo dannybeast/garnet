@@ -6,20 +6,53 @@
 
     var sliders = IcbcodeContent.Get(new string[] { "slajder" });
 
+    var news = IcbcodeContent.Get(new string[] { "novosti" }, order_fields: "content_publish desc, content_id desc");
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="intro" data-emergence="hidden">
-    <div class="container">
-        <h1 class="intro__title">
-            @Model.H1
+  <div class="container">
+    <div class="intro__play" data-video-play>
+      <svg class="svg-icon">
+        <use href="~/Front/dist/assets/icons/sprite.svg#icon-pause"></use>
+      </svg>
+      <svg class="svg-icon">
+        <use href="~/Front/dist/assets/icons/sprite.svg#icon-play"></use>
+      </svg>
+    </div>
+    <div class="intro__row"> 
+      <div class="intro__content">
+        <h1 class="intro__title">@Model.H1
         </h1>
-        <div class="intro__buttons">
-            <a class="intro-button" href="~/o-kompanii"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-details.png" alt=""></span><span>Подробнее о нас</span></a>
-            <a href="#" class="intro-button"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-price.png" alt=""></span><span>Получить прайс-лист</span></a>
-            <a href="#products" class="intro-button"><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-buy.png" alt=""></span><span>Оптовая продажа яблок</span></a>
+        <div class="intro__buttons"><a class="intro-button" href="~/o-kompanii"><span>Подробнее о нас</span><span class="intro-button__icon"><img src="~/Front/dist/assets/images/icons/apple-details.png" alt=""></span></a>
         </div>
-    </div><img class="intro__img" src="~/Front/dist/assets/images/intro.jpg" alt="" role="presentation" />
+      </div>
+      <div class="intro__news"> <a class="intro__news-title" href="~/novosti">Новости</a>
+        <div class="intro__slider js-swiper-news swiper-no-swiping">
+          <div class="swiper-wrapper">
+          @foreach (var item in news)
+            {
+             var image = item.GetImage();
+            <div class="swiper-slide"><a class="news-intro-item" href="@item.Url"> <span class="news-intro-item__image">
+              <svg viewBox="0 0 716 801">
+                <clippath id="my-clip-path" clippathunits="objectBoundingBox">
+                  <path d="M0.479,1 c-0.025,-0.006,-0.015,-0.001,-0.2,-0.097 c-0.041,-0.021,-0.089,-0.046,-0.108,-0.056 c-0.019,-0.01,-0.047,-0.024,-0.063,-0.033 c-0.016,-0.008,-0.033,-0.017,-0.037,-0.02 c-0.012,-0.007,-0.03,-0.021,-0.038,-0.029 c-0.016,-0.017,-0.022,-0.027,-0.028,-0.045 l-0.003,-0.011,0,-0.208,0,-0.208,0.003,-0.011 c0.002,-0.006,0.005,-0.015,0.007,-0.019 c0.01,-0.019,0.035,-0.042,0.06,-0.057 c0.005,-0.003,0.048,-0.025,0.095,-0.05 c0.289,-0.149,0.281,-0.145,0.304,-0.152 c0.01,-0.003,0.014,-0.004,0.029,-0.004 c0.017,0,0.018,0,0.033,0.005 c0.022,0.007,0.013,0.002,0.174,0.086 c0.042,0.022,0.09,0.046,0.107,0.055 c0.017,0.009,0.042,0.022,0.055,0.028 c0.013,0.007,0.029,0.015,0.037,0.019 c0.022,0.011,0.035,0.02,0.048,0.03 c0.027,0.021,0.04,0.04,0.045,0.065 c0.001,0.004,0.001,0.079,0.001,0.214 c0,0.204,0,0.207,-0.003,0.218 c-0.006,0.021,-0.02,0.04,-0.044,0.059 c-0.019,0.015,-0.009,0.009,-0.198,0.107 c-0.018,0.009,-0.056,0.029,-0.085,0.044 c-0.029,0.015,-0.064,0.033,-0.076,0.039 c-0.049,0.025,-0.066,0.031,-0.091,0.032 c-0.013,0,-0.018,0,-0.026,-0.002"></path>
+                </clippath>
+                <image clip-path="url('#my-clip-path')" width="716px" height="801px" xlink:href="@(image?.Url)?w=280&h=313&mode=crop"></image>
+              </svg></span><span class="news-intro-item__content"> <span class="news-intro-item__date">@item.Publish.Value.ToString("dd/MM/yyyy")</span><span class="news-intro-item__title">@item.Link
+              <svg class="svg-icon">
+                <use href="~/Front/dist/assets/icons/sprite.svg#icon-left-arrow"></use>
+              </svg></span></span></a>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <video class="intro__video" src="~/Front/dist/assets/images/video.mp4" playsinline muted autoplay loop data-video>
+  </video>
 </section>
 <article class="gray">
     <section class="advantages" data-emergence="hidden">

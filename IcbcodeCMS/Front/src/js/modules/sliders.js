@@ -21,7 +21,26 @@ export default function() {
       },
     },
   });
-
+new Swiper(".js-swiper-news", {
+    loop: false,
+    spaceBetween: 10,
+    noSwiping: true,
+    breakpoints: {
+      0: {
+        slidesPerView: 1.2,
+        freeMode: true,
+        noSwiping: false,
+      },
+      768: {
+        slidesPerView: 2,
+        freeMode: true,
+        noSwiping: false,
+      },
+      1100: {
+        slidesPerView: 'auto',
+      },
+    },
+  });
   var swiperApple = new Swiper(".js-swiper-apple", {
     loop: false,
     spaceBetween: 0,

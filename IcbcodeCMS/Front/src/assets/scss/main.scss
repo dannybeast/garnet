@@ -2093,7 +2093,7 @@ width: 100px;
  
 
  &__title {
-  font-size: clamp(58px, 5.5vw, 92px);
+  font-size: clamp(56px,5vw,92px);
   color: #fff;
   max-width: clamp(750px, 60vw, 900px);
   line-height: 1;
@@ -2111,7 +2111,7 @@ width: 100px;
   @include md-block() {
    font-size: 50px;
    margin-bottom: 40px;
-   max-width: 480px;
+   max-width: 500px;
   }
 
   @include sm-block() {

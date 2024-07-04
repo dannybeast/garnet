@@ -1995,10 +1995,9 @@ width: 100px;
    height: 50px;
    }
    
-  svg{
+  img{
    width: 20px;
    height: 20px;
-   fill:#eb2d2a;
 
    &:last-child{
     display: none;
@@ -2011,7 +2010,7 @@ width: 100px;
   } 
 
   &.is-active{
-   svg{
+   img{
     &:first-child{
      display: none;
     }

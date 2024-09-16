@@ -6,13 +6,28 @@
         img(src="assets/images/logo/logo-white.png", alt="").logo-white
       +e.NAV.nav
         include ./_nav
-      +b.contact-item
-        +e.icon
-          +icon('place')
-        +e.content Краснодарский край, г.Курганинск, ул.Гранатовая территория 2/2
-      +b.contact-item
-        +e.icon
-          +icon('phone')
-        +e.content
-          +e.A(href="tel:+78613041735" class="phone") +7(86130) 4-17-35
-          +e.A(href="tel:+79886520985" class="phone") +7(988) 652-09-85
+      +e.item
+       +b.contact-item
+         +e.icon
+           +icon('place')
+         +e.content Краснодарский край, г.Курганинск, ул.Гранатовая территория 2/2
+      +e.item
+       +b.contact-item
+         +e.icon
+           +icon('phone')
+         +e.content
+           +e.A(href="tel:+78613041735" class="phone") +7(86130) 4-17-35
+           +e.A(href="tel:+79886520985" class="phone") +7(988) 652-09-85
+       +b.UL.follow-header
+        +e.LI
+          +e.A(href="mailto:sad@granat-garden.ru" target="_blank")
+            +icon('email')
+        +e.LI
+          +e.A(href="#" target="_blank")
+            +icon('telegram')
+        +e.LI
+          +e.A(href="#" target="_blank")
+            +icon('whatsapp')
+        +e.LI
+          +e.A(href="#" target="_blank")
+            +icon('vk')

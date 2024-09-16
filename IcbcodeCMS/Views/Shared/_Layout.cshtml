@@ -14,7 +14,7 @@
     <meta name="description" content="@Model.Description">
     <meta name="keywords" content="@Model.Keywords">
     <link rel="shortcut icon" href="~/Front/dist/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/Front/dist/assets/css/app-04-07-2024.css">
+    <link rel="stylesheet" href="~/Front/dist/assets/css/app-160920241150.css">
     @Html.Raw(settings["schetchik-google-analytics"])
 </head>
 <body>
@@ -42,7 +42,8 @@
                                         <a class="btn btn--primary-gradient js-modal" data-modal="request">Купить яблоки оптом</a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> 
+				<div class="header__item">
                             <div class="contact-item">
                                 <div class="contact-item__icon">
                                     <svg class="svg-icon">
@@ -52,7 +53,8 @@
                                 <div class="contact-item__content">
                                     <a class="js-modal" data-modal="map">@settings["kratkij-adres"]</a>
                                 </div>
-                            </div>
+                            </div> </div>
+<div class="header__item">
                             <div class="contact-item">
                                 <div class="contact-item__icon">
                                     <svg class="svg-icon">
@@ -65,6 +67,29 @@
                                  <div class="contact-item__content"><a class="contact-item__phone" href="tel:+78613041735">+7(86130) 4-17-35</a><a class="contact-item__phone" href="tel:+79886520985">+7(988) 652-09-85</a>
                                  </div>
                             </div>
+<ul class="follow-header">
+                    <li><a href="mailto:sad@granat-garden.ru" target="_blank">
+                      <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-email"></use>
+                      </svg></a>
+                    </li>
+                    <li><a href="#" target="_blank">
+                      <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-telegram"></use>
+                      </svg></a>
+                    </li>
+                    <li><a href="#" target="_blank">
+                      <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-whatsapp"></use>
+                      </svg></a>
+                    </li>
+                    <li><a href="#" target="_blank">
+                      <svg class="svg-icon">
+                        <use href="~/Front/dist/assets/icons/sprite.svg#icon-vk"></use>
+                      </svg></a>
+                    </li>
+                  </ul>
+ </div>
                         </div>
                     </div>
                 </header>
@@ -106,16 +131,29 @@
                             <p>Контакты компании "Гранат”</p>
                         </div>
                         <div class="follow">
-                            <ul>
-                                <li>
-                                    <a href="@settings["instagram"]" rel="nofollow" target="_blank"><img src="~/Front/dist/assets/images/social/instagram.png" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="@settings["vkontakte"]" rel="nofollow" target="_blank"><img src="~/Front/dist/assets/images/social/vk.png" alt=""></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <ul>
+                  <li><a href="mailto:sad@granat-garden.ru" target="_blank">
+                    <svg class="svg-icon">
+                      <use href="~/Front/dist/assets/icons/sprite.svg#icon-email"></use>
+                    </svg></a>
+                  </li>
+                  <li><a href="#" target="_blank">
+                    <svg class="svg-icon">
+                      <use href="~/Front/dist/assets/icons/sprite.svg#icon-telegram"></use>
+                    </svg></a>
+                  </li>
+                  <li><a href="#" target="_blank">
+                    <svg class="svg-icon">
+                      <use href="~/Front/dist/assets/icons/sprite.svg#icon-whatsapp"></use>
+                    </svg></a>
+                  </li>
+                  <li><a href="#" target="_blank">
+                    <svg class="svg-icon">
+                      <use href="~/Front/dist/assets/icons/sprite.svg#icon-vk"></use>
+                    </svg></a>
+                  </li>
+                </ul>
+              </div>                    </div>
                     <div class="footer__row">
                         <div class="footer__col">
                             <ul class="contacts">
@@ -202,7 +240,7 @@
             </div>
         </div>
     </main>
-    <script src="~/Front/dist/assets/js/app.js"></script>
+    <script src="~/Front/dist/assets/js/app-160920241150.js"></script>
 	@Html.Raw(settings["schetchik-yandeks-metrika"])
 </body>
 </html>

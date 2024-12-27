@@ -83,7 +83,12 @@
 			flex-wrap: wrap;
 			gap: rem(10) clamp(15px, 1.6vw, 25px);
 		}
-
+		&-btn {
+			display: none;
+			@include lg-block() {
+				display: block;
+			}
+		}
 		a {
 			font-size: 15px;
 			letter-spacing: -0.52px;
@@ -117,6 +122,22 @@
 
 	&__item {
 		position: relative;
+		margin-bottom: auto;
+		.contact-item__content {
+			min-height: 40px;
+		}
+		&-btn.btn {
+			border-radius: 8px;
+			font-size: 15px;
+			margin-top: 10px;
+			margin-left: 33px;
+			padding: 0 15px;
+			height: 40px;
+			white-space: nowrap;
+			@include lg-block() {
+				display: none;
+			}
+		}
 		.follow-header {
 			padding-top: 10px;
 			@include from($break_lg) {
